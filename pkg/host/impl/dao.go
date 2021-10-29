@@ -5,7 +5,7 @@ import (
 	"database/sql"
 	"fmt"
 
-	"github.com/infraboard/cmdb/pkg/host"
+	"github.com/ericyaoxr/cmdb/pkg/host"
 )
 
 func (s *service) save(ctx context.Context, h *host.Host) error {

@@ -3,7 +3,7 @@ package impl
 import (
 	"context"
 
-	"github.com/infraboard/cmdb/pkg/syncer"
+	"github.com/ericyaoxr/cmdb/pkg/syncer"
 )
 
 func (s *service) syncRds(ctx context.Context, secret *syncer.Secret, region string) (

@@ -5,11 +5,11 @@ import (
 
 	"github.com/julienschmidt/httprouter"
 
-	"github.com/infraboard/mcube/logger"
-	"github.com/infraboard/mcube/logger/zap"
+	"github.com/ericyaoxr/mcube/logger"
+	"github.com/ericyaoxr/mcube/logger/zap"
 
-	"github.com/infraboard/cmdb/pkg"
-	"github.com/infraboard/cmdb/pkg/syncer"
+	"github.com/ericyaoxr/cmdb/pkg"
+	"github.com/ericyaoxr/cmdb/pkg/syncer"
 )
 
 var (

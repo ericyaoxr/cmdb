@@ -4,10 +4,10 @@ import (
 	"context"
 	"database/sql"
 
-	"github.com/infraboard/cmdb/conf"
-	"github.com/infraboard/cmdb/pkg/syncer"
-	"github.com/infraboard/mcube/exception"
-	"github.com/infraboard/mcube/sqlbuilder"
+	"github.com/ericyaoxr/cmdb/conf"
+	"github.com/ericyaoxr/cmdb/pkg/syncer"
+	"github.com/ericyaoxr/mcube/exception"
+	"github.com/ericyaoxr/mcube/sqlbuilder"
 )
 
 const (

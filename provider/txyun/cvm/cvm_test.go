@@ -7,8 +7,8 @@ import (
 
 	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/regions"
 
-	"github.com/infraboard/cmdb/provider/txyun/connectivity"
-	op "github.com/infraboard/cmdb/provider/txyun/cvm"
+	"github.com/ericyaoxr/cmdb/provider/txyun/connectivity"
+	op "github.com/ericyaoxr/cmdb/provider/txyun/cvm"
 )
 
 var (

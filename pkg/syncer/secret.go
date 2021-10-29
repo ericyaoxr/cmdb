@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/ericyaoxr/cmdb/conf"
+	"github.com/ericyaoxr/cmdb/pkg/resource"
+	"github.com/ericyaoxr/mcube/crypto/cbc"
+	"github.com/ericyaoxr/mcube/types/ftime"
 	"github.com/go-playground/validator/v10"
-	"github.com/infraboard/cmdb/conf"
-	"github.com/infraboard/cmdb/pkg/resource"
-	"github.com/infraboard/mcube/crypto/cbc"
-	"github.com/infraboard/mcube/types/ftime"
 	"github.com/rs/xid"
 )
 

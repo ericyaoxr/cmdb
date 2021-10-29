@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/infraboard/cmdb/pkg/resource"
-	"github.com/infraboard/mcube/types/ftime"
+	"github.com/ericyaoxr/cmdb/pkg/resource"
+	"github.com/ericyaoxr/mcube/types/ftime"
 )
 
 func NewDefaultHost() *Host {

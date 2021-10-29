@@ -6,7 +6,7 @@ import (
 
 	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/regions"
 
-	"github.com/infraboard/cmdb/provider/txyun/connectivity"
+	"github.com/ericyaoxr/cmdb/provider/txyun/connectivity"
 )
 
 func TestClient(t *testing.T) {

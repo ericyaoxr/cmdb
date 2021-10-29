@@ -1,6 +1,6 @@
 package syncer
 
-import "github.com/infraboard/cmdb/pkg/resource"
+import "github.com/ericyaoxr/cmdb/pkg/resource"
 
 func NewSyncRequest(secretId string) *SyncRequest {
 	return &SyncRequest{

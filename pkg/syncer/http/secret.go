@@ -3,11 +3,11 @@ package http
 import (
 	"net/http"
 
-	"github.com/infraboard/mcube/http/request"
-	"github.com/infraboard/mcube/http/response"
+	"github.com/ericyaoxr/mcube/http/request"
+	"github.com/ericyaoxr/mcube/http/response"
 	"github.com/julienschmidt/httprouter"
 
-	"github.com/infraboard/cmdb/pkg/syncer"
+	"github.com/ericyaoxr/cmdb/pkg/syncer"
 )
 
 func (h *handler) QuerySecret(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {

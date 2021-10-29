@@ -3,12 +3,12 @@ package http
 import (
 	"net/http"
 
-	"github.com/infraboard/mcube/exception"
-	"github.com/infraboard/mcube/http/response"
+	"github.com/ericyaoxr/mcube/exception"
+	"github.com/ericyaoxr/mcube/http/response"
 	"github.com/julienschmidt/httprouter"
 
-	"github.com/infraboard/cmdb/pkg/resource"
-	"github.com/infraboard/cmdb/pkg/syncer"
+	"github.com/ericyaoxr/cmdb/pkg/resource"
+	"github.com/ericyaoxr/cmdb/pkg/syncer"
 )
 
 func (h *handler) Sync(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {

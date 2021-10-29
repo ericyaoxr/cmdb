@@ -5,10 +5,10 @@ import (
 
 	"github.com/julienschmidt/httprouter"
 
-	"github.com/infraboard/mcube/http/request"
-	"github.com/infraboard/mcube/http/response"
+	"github.com/ericyaoxr/mcube/http/request"
+	"github.com/ericyaoxr/mcube/http/response"
 
-	"github.com/infraboard/cmdb/pkg/host"
+	"github.com/ericyaoxr/cmdb/pkg/host"
 )
 
 func (h *handler) QueryHost(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {

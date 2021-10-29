@@ -10,14 +10,14 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/infraboard/mcube/logger"
-	"github.com/infraboard/mcube/logger/zap"
+	"github.com/ericyaoxr/mcube/logger"
+	"github.com/ericyaoxr/mcube/logger/zap"
 
-	"github.com/infraboard/cmdb/conf"
-	"github.com/infraboard/cmdb/pkg"
-	"github.com/infraboard/cmdb/pkg/host/impl"
-	syncer "github.com/infraboard/cmdb/pkg/syncer/impl"
-	"github.com/infraboard/cmdb/protocol"
+	"github.com/ericyaoxr/cmdb/conf"
+	"github.com/ericyaoxr/cmdb/pkg"
+	"github.com/ericyaoxr/cmdb/pkg/host/impl"
+	syncer "github.com/ericyaoxr/cmdb/pkg/syncer/impl"
+	"github.com/ericyaoxr/cmdb/protocol"
 )
 
 // startCmd represents the start command

@@ -4,20 +4,16 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/infraboard/cmdb/conf"
-	"github.com/infraboard/cmdb/pkg/host"
-	"github.com/infraboard/cmdb/pkg/resource"
-	"github.com/infraboard/cmdb/pkg/syncer"
-	"github.com/infraboard/mcube/exception"
+	"github.com/ericyaoxr/cmdb/conf"
+	"github.com/ericyaoxr/cmdb/pkg/host"
+	"github.com/ericyaoxr/cmdb/pkg/resource"
+	"github.com/ericyaoxr/cmdb/pkg/syncer"
+	"github.com/ericyaoxr/mcube/exception"
 
-	aliConn "github.com/infraboard/cmdb/provider/aliyun/connectivity"
-	ecsOp "github.com/infraboard/cmdb/provider/aliyun/ecs"
-	hwConn "github.com/infraboard/cmdb/provider/huawei/connectivity"
-	hwEcsOp "github.com/infraboard/cmdb/provider/huawei/ecs"
-	txConn "github.com/infraboard/cmdb/provider/txyun/connectivity"
-	cvmOp "github.com/infraboard/cmdb/provider/txyun/cvm"
-	vsConn "github.com/infraboard/cmdb/provider/vsphere/connectivity"
-	vmOp "github.com/infraboard/cmdb/provider/vsphere/vm"
+	aliConn "github.com/ericyaoxr/cmdb/provider/aliyun/connectivity"
+	ecsOp "github.com/ericyaoxr/cmdb/provider/aliyun/ecs"
+	txConn "github.com/ericyaoxr/cmdb/provider/txyun/connectivity"
+	cvmOp "github.com/ericyaoxr/cmdb/provider/txyun/cvm"
 )
 
 func (s *service) syncHost(ctx context.Context, secret *syncer.Secret, region string) (
@@ -50,27 +46,6 @@ func (s *service) syncHost(ctx context.Context, secret *syncer.Secret, region st
 		client := txConn.NewTencentCloudClient(secret.APIKey, secret.APISecret, region)
 		operater := cvmOp.NewCVMOperater(client.CvmClient())
 		pager = operater.PageQuery()
-	case resource.VendorHuaWei:
-		s.log.Debugf("sync hwyun host ...")
-		client := hwConn.NewHuaweiCloudClient(secret.APIKey, secret.APISecret, region)
-		ec, err := client.EcsClient()
-		if err != nil {
-			return nil, err
-		}
-		operater := hwEcsOp.NewEcsOperater(ec)
-		pager = operater.PageQuery()
-	case resource.VendorVsphere:
-		s.log.Debugf("sync vshpere host ...")
-		client := vsConn.NewVsphereClient(secret.Address, secret.APIKey, secret.APISecret)
-		ec, err := client.VimClient()
-		if err != nil {
-			return nil, err
-		}
-		operater := vmOp.NewVmOperater(ec)
-		hs, err = operater.Query()
-		if err != nil {
-			return nil, err
-		}
 	default:
 		return nil, exception.NewBadRequest("unsuport vendor %s", secret.Vendor)
 	}

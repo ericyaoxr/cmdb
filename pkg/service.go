@@ -1,8 +1,8 @@
 package pkg
 
 import (
-	"github.com/infraboard/cmdb/pkg/host"
-	"github.com/infraboard/cmdb/pkg/syncer"
+	"github.com/ericyaoxr/cmdb/pkg/host"
+	"github.com/ericyaoxr/cmdb/pkg/syncer"
 )
 
 var (

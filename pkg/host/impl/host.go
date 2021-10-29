@@ -5,12 +5,12 @@ import (
 	"database/sql"
 	"fmt"
 
-	"github.com/infraboard/mcube/exception"
-	"github.com/infraboard/mcube/sqlbuilder"
-	"github.com/infraboard/mcube/types/ftime"
+	"github.com/ericyaoxr/mcube/exception"
+	"github.com/ericyaoxr/mcube/sqlbuilder"
+	"github.com/ericyaoxr/mcube/types/ftime"
 	"github.com/rs/xid"
 
-	"github.com/infraboard/cmdb/pkg/host"
+	"github.com/ericyaoxr/cmdb/pkg/host"
 )
 
 const (

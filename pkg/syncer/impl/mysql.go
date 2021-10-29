@@ -3,11 +3,11 @@ package impl
 import (
 	"database/sql"
 
-	"github.com/infraboard/cmdb/conf"
-	"github.com/infraboard/cmdb/pkg"
-	"github.com/infraboard/cmdb/pkg/host"
-	"github.com/infraboard/mcube/logger"
-	"github.com/infraboard/mcube/logger/zap"
+	"github.com/ericyaoxr/cmdb/conf"
+	"github.com/ericyaoxr/cmdb/pkg"
+	"github.com/ericyaoxr/cmdb/pkg/host"
+	"github.com/ericyaoxr/mcube/logger"
+	"github.com/ericyaoxr/mcube/logger/zap"
 )
 
 var (

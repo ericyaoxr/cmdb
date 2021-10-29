@@ -1,7 +1,7 @@
 package rds
 
 import (
-	"github.com/infraboard/cmdb/pkg/resource"
+	"github.com/ericyaoxr/cmdb/pkg/resource"
 )
 
 func NewDefaultRds() *Rds {

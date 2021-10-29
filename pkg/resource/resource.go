@@ -24,8 +24,6 @@ type Type int
 const (
 	VendorAliYun Vendor = iota
 	VendorTencent
-	VendorHuaWei
-	VendorVsphere
 )
 
 type Vendor int

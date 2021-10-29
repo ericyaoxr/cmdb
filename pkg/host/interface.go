@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/ericyaoxr/cmdb/pkg/resource"
 	"github.com/go-playground/validator/v10"
-	"github.com/infraboard/cmdb/pkg/resource"
 )
 
 // use a single instance of Validate, it caches struct info

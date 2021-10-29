@@ -1,6 +1,6 @@
 PROJECT_NAME=cmdb
 MAIN_FILE=main.go
-PKG := "github.com/infraboard/$(PROJECT_NAME)"
+PKG := "github.com/ericyaoxr/$(PROJECT_NAME)"
 MOD_DIR := $(shell go env GOMODCACHE)
 PKG_LIST := $(shell go list ${PKG}/... | grep -v /vendor/)
 GO_FILES := $(shell find . -name '*.go' | grep -v /vendor/ | grep -v _test.go)

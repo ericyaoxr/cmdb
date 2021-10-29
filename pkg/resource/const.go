@@ -74,14 +74,10 @@ var (
 	Vendor_name = map[int32]string{
 		0: "VENDOR_ALIYUN",
 		1: "VENDOR_TENCENT",
-		2: "VENDOR_HUAWEI",
-		3: "VENDOR_VSPHERE",
 	}
 	Vendor_value = map[string]int32{
 		"VENDOR_ALIYUN":  0,
 		"VENDOR_TENCENT": 1,
-		"VENDOR_HUAWEI":  2,
-		"VENDOR_VSPHERE": 3,
 	}
 )
 

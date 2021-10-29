@@ -6,14 +6,14 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/infraboard/mcube/logger"
-	"github.com/infraboard/mcube/logger/zap"
+	"github.com/ericyaoxr/mcube/logger"
+	"github.com/ericyaoxr/mcube/logger/zap"
 	"github.com/julienschmidt/httprouter"
 	"github.com/rs/cors"
 
-	"github.com/infraboard/cmdb/conf"
-	hostAPI "github.com/infraboard/cmdb/pkg/host/http"
-	syncerAPI "github.com/infraboard/cmdb/pkg/syncer/http"
+	"github.com/ericyaoxr/cmdb/conf"
+	hostAPI "github.com/ericyaoxr/cmdb/pkg/host/http"
+	syncerAPI "github.com/ericyaoxr/cmdb/pkg/syncer/http"
 )
 
 // NewHTTPService 构建函数

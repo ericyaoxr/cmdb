@@ -3,9 +3,9 @@ package impl
 import (
 	"context"
 
-	"github.com/infraboard/cmdb/pkg/resource"
-	"github.com/infraboard/cmdb/pkg/syncer"
-	"github.com/infraboard/mcube/exception"
+	"github.com/ericyaoxr/cmdb/pkg/resource"
+	"github.com/ericyaoxr/cmdb/pkg/syncer"
+	"github.com/ericyaoxr/mcube/exception"
 )
 
 func (s *service) Sync(ctx context.Context, req *syncer.SyncRequest) (
@@ -22,16 +22,6 @@ func (s *service) Sync(ctx context.Context, req *syncer.SyncRequest) (
 	secret, err := s.DescribeSecret(ctx, syncer.NewDescribeSecretRequest(req.SecretId))
 	if err != nil {
 		return nil, err
-	}
-
-	// 如果不是vsphere 需要检查region
-	if !secret.Vendor.Equal(resource.VendorVsphere) {
-		if req.Region == "" {
-			return nil, exception.NewBadRequest("region required")
-		}
-		if !secret.IsAllowRegion(req.Region) {
-			return nil, exception.NewBadRequest("this secret not allow sync region %s", req.Region)
-		}
 	}
 
 	switch req.ResourceType {
