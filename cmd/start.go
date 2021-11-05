@@ -16,7 +16,9 @@ import (
 	"github.com/ericyaoxr/cmdb/conf"
 	"github.com/ericyaoxr/cmdb/pkg"
 	"github.com/ericyaoxr/cmdb/pkg/host/impl"
-	syncer "github.com/ericyaoxr/cmdb/pkg/syncer/impl"
+	searcher "github.com/ericyaoxr/cmdb/pkg/resource/impl"
+	secretImpl "github.com/ericyaoxr/cmdb/pkg/secret/impl"
+	taskImpl "github.com/ericyaoxr/cmdb/pkg/task/impl"
 	"github.com/ericyaoxr/cmdb/protocol"
 )
 
@@ -42,11 +44,23 @@ var serviceCmd = &cobra.Command{
 		}
 		pkg.Host = impl.Service
 
-		// Syncer Service
-		if err := syncer.Service.Config(); err != nil {
+		// Secret Service
+		if err := secretImpl.Service.Config(); err != nil {
 			return err
 		}
-		pkg.Syncer = syncer.Service
+		pkg.Secret = secretImpl.Service
+
+		// Task Service
+		if err := taskImpl.Service.Config(); err != nil {
+			return err
+		}
+		pkg.Task = taskImpl.Service
+
+		// resource Service
+		if err := searcher.Service.Config(); err != nil {
+			return err
+		}
+		pkg.Resource = searcher.Service
 
 		// 启动服务
 		ch := make(chan os.Signal, 1)

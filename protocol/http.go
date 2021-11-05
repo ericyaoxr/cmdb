@@ -13,7 +13,9 @@ import (
 
 	"github.com/ericyaoxr/cmdb/conf"
 	hostAPI "github.com/ericyaoxr/cmdb/pkg/host/http"
-	syncerAPI "github.com/ericyaoxr/cmdb/pkg/syncer/http"
+	searchAPI "github.com/ericyaoxr/cmdb/pkg/resource/http"
+	secretAPI "github.com/ericyaoxr/cmdb/pkg/secret/http"
+	taskAPI "github.com/ericyaoxr/cmdb/pkg/task/http"
 )
 
 // NewHTTPService 构建函数
@@ -49,7 +51,9 @@ type HTTPService struct {
 func (s *HTTPService) Start() error {
 	// 装置子服务路由
 	hostAPI.RegistAPI(s.r)
-	syncerAPI.RegistAPI(s.r)
+	secretAPI.RegistAPI(s.r)
+	taskAPI.RegistAPI(s.r)
+	searchAPI.RegistAPI(s.r)
 
 	// 启动 HTTP服务
 	s.l.Infof("HTTP服务启动成功, 监听地址: %s", s.server.Addr)
