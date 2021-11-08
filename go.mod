@@ -9,8 +9,7 @@ require (
 	github.com/ericyaoxr/mcube v1.4.6
 	github.com/go-playground/validator/v10 v10.9.0
 	github.com/go-sql-driver/mysql v1.6.0
-	github.com/julienschmidt/httprouter v1.3.0
-	github.com/rs/cors v1.8.0
+	github.com/grpc-ecosystem/go-grpc-middleware v1.2.0
 	github.com/rs/xid v1.3.0
 	github.com/spf13/cobra v1.2.1
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/cdb v1.0.272

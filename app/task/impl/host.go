@@ -10,8 +10,6 @@ import (
 	"github.com/ericyaoxr/cmdb/app/task"
 	"github.com/ericyaoxr/cmdb/conf"
 
-	aliConn "github.com/ericyaoxr/cmdb/provider/aliyun/connectivity"
-	ecsOp "github.com/ericyaoxr/cmdb/provider/aliyun/ecs"
 	txConn "github.com/ericyaoxr/cmdb/provider/txyun/connectivity"
 	cvmOp "github.com/ericyaoxr/cmdb/provider/txyun/cvm"
 )
@@ -38,23 +36,23 @@ func (s *service) syncHost(ctx context.Context, secret *secret.Secret, t *task.T
 
 	hs := host.NewHostSet()
 	switch secret.Vendor {
-	case resource.Vendor_ALIYUN:
-		s.log.Debugf("sync aliyun host ...")
-		client := aliConn.NewAliCloudClient(secret.ApiKey, secret.ApiSecret, t.Region)
-		ec, err := client.EcsClient()
-		if err != nil {
-			t.Failed(err.Error())
-			return
-		}
-		operater := ecsOp.NewEcsOperater(ec)
-		req := ecsOp.NewPageQueryRequest()
-		req.Rate = int(secret.RequestRate)
-		pager = operater.PageQuery(req)
 	case resource.Vendor_TENCENT:
 		s.log.Debugf("sync txyun host ...")
 		client := txConn.NewTencentCloudClient(secret.ApiKey, secret.ApiSecret, t.Region)
 		operater := cvmOp.NewCVMOperater(client.CvmClient())
 		pager = operater.PageQuery()
+	// case resource.Vendor_ALIYUN:
+	// 	s.log.Debugf("sync aliyun host ...")
+	// 	client := aliConn.NewAliCloudClient(secret.ApiKey, secret.ApiSecret, t.Region)
+	// 	ec, err := client.EcsClient()
+	// 	if err != nil {
+	// 		t.Failed(err.Error())
+	// 		return
+	// 	}
+	// 	operater := ecsOp.NewEcsOperater(ec)
+	// 	req := ecsOp.NewPageQueryRequest()
+	// 	req.Rate = int(secret.RequestRate)
+	// 	pager = operater.PageQuery(req)
 	default:
 		t.Failed(fmt.Sprintf("unsuport vendor %s", secret.Vendor))
 		return

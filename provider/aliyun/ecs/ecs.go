@@ -6,7 +6,6 @@ import (
 	"github.com/aliyun/alibaba-cloud-sdk-go/services/ecs"
 
 	"github.com/ericyaoxr/cmdb/app/host"
-	"github.com/ericyaoxr/cmdb/app/resource"
 	"github.com/ericyaoxr/mcube/logger"
 	"github.com/ericyaoxr/mcube/logger/zap"
 )
@@ -33,7 +32,7 @@ func (o *EcsOperater) transferSet(items []ecs.Instance) *host.HostSet {
 
 func (o *EcsOperater) transferOne(ins ecs.Instance) *host.Host {
 	h := host.NewDefaultHost()
-	h.Base.Vendor = resource.Vendor_ALIYUN
+	// h.Base.Vendor = resource.Vendor_ALIYUN
 	h.Base.Region = ins.RegionId
 	h.Base.Zone = ins.ZoneId
 

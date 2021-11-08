@@ -24,27 +24,21 @@ type Vendor int32
 
 const (
 	Vendor_NULL    Vendor = 0
-	Vendor_ALIYUN  Vendor = 1
-	Vendor_TENCENT Vendor = 2
-	Vendor_HUAWEI  Vendor = 3
-	Vendor_VSPHERE Vendor = 4
+	Vendor_TENCENT Vendor = 1
+	// Vendor_ALIYUN  Vendor = 2
 )
 
 // Enum value maps for Vendor.
 var (
 	Vendor_name = map[int32]string{
 		0: "NULL",
-		1: "ALIYUN",
-		2: "TENCENT",
-		3: "HUAWEI",
-		4: "VSPHERE",
+		1: "TENCENT",
+		// 2: "ALIYUN",
 	}
 	Vendor_value = map[string]int32{
 		"NULL":    0,
-		"ALIYUN":  1,
-		"TENCENT": 2,
-		"HUAWEI":  3,
-		"VSPHERE": 4,
+		"TENCENT": 1,
+		// "ALIYUN":  2,
 	}
 )
 
@@ -256,10 +250,10 @@ type Base struct {
 	SecretId string `protobuf:"bytes,3,opt,name=secret_id,json=secretId,proto3" json:"secret_id"`
 	// 厂商
 	// @gotags: json:"vendor"
-	Vendor Vendor `protobuf:"varint,4,opt,name=vendor,proto3,enum=infraboard.cmdb.resource.Vendor" json:"vendor"`
+	Vendor Vendor `protobuf:"varint,4,opt,name=vendor,proto3,enum=ericyaoxr.cmdb.resource.Vendor" json:"vendor"`
 	// 资源类型
 	// @gotags: json:"resource_type"
-	ResourceType Type `protobuf:"varint,5,opt,name=resource_type,json=resourceType,proto3,enum=infraboard.cmdb.resource.Type" json:"resource_type"`
+	ResourceType Type `protobuf:"varint,5,opt,name=resource_type,json=resourceType,proto3,enum=ericyaoxr.cmdb.resource.Type" json:"resource_type"`
 	// 地域
 	// @gotags: json:"region"
 	Region string `protobuf:"bytes,6,opt,name=region,proto3" json:"region"`
@@ -555,8 +549,8 @@ type SearchRequest struct {
 
 	PageSize   uint64 `protobuf:"varint,1,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	PageNumber uint64 `protobuf:"varint,2,opt,name=page_number,json=pageNumber,proto3" json:"page_number,omitempty"`
-	Vendor     Vendor `protobuf:"varint,3,opt,name=vendor,proto3,enum=infraboard.cmdb.resource.Vendor" json:"vendor,omitempty"`
-	Type       Type   `protobuf:"varint,4,opt,name=type,proto3,enum=infraboard.cmdb.resource.Type" json:"type,omitempty"`
+	Vendor     Vendor `protobuf:"varint,3,opt,name=vendor,proto3,enum=ericyaoxr.cmdb.resource.Vendor" json:"vendor,omitempty"`
+	Type       Type   `protobuf:"varint,4,opt,name=type,proto3,enum=ericyaoxr.cmdb.resource.Type" json:"type,omitempty"`
 	Keywords   string `protobuf:"bytes,5,opt,name=keywords,proto3" json:"keywords,omitempty"`
 }
 
@@ -748,26 +742,26 @@ func file_app_resource_pb_resource_proto_rawDescGZIP() []byte {
 var file_app_resource_pb_resource_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_app_resource_pb_resource_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_app_resource_pb_resource_proto_goTypes = []interface{}{
-	(Vendor)(0),           // 0: infraboard.cmdb.resource.Vendor
-	(Type)(0),             // 1: infraboard.cmdb.resource.Type
-	(*Resource)(nil),      // 2: infraboard.cmdb.resource.Resource
-	(*ResourceSet)(nil),   // 3: infraboard.cmdb.resource.ResourceSet
-	(*Base)(nil),          // 4: infraboard.cmdb.resource.Base
-	(*Information)(nil),   // 5: infraboard.cmdb.resource.Information
-	(*SearchRequest)(nil), // 6: infraboard.cmdb.resource.SearchRequest
-	nil,                   // 7: infraboard.cmdb.resource.Information.TagsEntry
+	(Vendor)(0),           // 0: ericyaoxr.cmdb.resource.Vendor
+	(Type)(0),             // 1: ericyaoxr.cmdb.resource.Type
+	(*Resource)(nil),      // 2: ericyaoxr.cmdb.resource.Resource
+	(*ResourceSet)(nil),   // 3: ericyaoxr.cmdb.resource.ResourceSet
+	(*Base)(nil),          // 4: ericyaoxr.cmdb.resource.Base
+	(*Information)(nil),   // 5: ericyaoxr.cmdb.resource.Information
+	(*SearchRequest)(nil), // 6: ericyaoxr.cmdb.resource.SearchRequest
+	nil,                   // 7: ericyaoxr.cmdb.resource.Information.TagsEntry
 }
 var file_app_resource_pb_resource_proto_depIdxs = []int32{
-	4, // 0: infraboard.cmdb.resource.Resource.base:type_name -> infraboard.cmdb.resource.Base
-	5, // 1: infraboard.cmdb.resource.Resource.information:type_name -> infraboard.cmdb.resource.Information
-	2, // 2: infraboard.cmdb.resource.ResourceSet.items:type_name -> infraboard.cmdb.resource.Resource
-	0, // 3: infraboard.cmdb.resource.Base.vendor:type_name -> infraboard.cmdb.resource.Vendor
-	1, // 4: infraboard.cmdb.resource.Base.resource_type:type_name -> infraboard.cmdb.resource.Type
-	7, // 5: infraboard.cmdb.resource.Information.tags:type_name -> infraboard.cmdb.resource.Information.TagsEntry
-	0, // 6: infraboard.cmdb.resource.SearchRequest.vendor:type_name -> infraboard.cmdb.resource.Vendor
-	1, // 7: infraboard.cmdb.resource.SearchRequest.type:type_name -> infraboard.cmdb.resource.Type
-	6, // 8: infraboard.cmdb.resource.Service.Search:input_type -> infraboard.cmdb.resource.SearchRequest
-	3, // 9: infraboard.cmdb.resource.Service.Search:output_type -> infraboard.cmdb.resource.ResourceSet
+	4, // 0: ericyaoxr.cmdb.resource.Resource.base:type_name -> ericyaoxr.cmdb.resource.Base
+	5, // 1: ericyaoxr.cmdb.resource.Resource.information:type_name -> ericyaoxr.cmdb.resource.Information
+	2, // 2: ericyaoxr.cmdb.resource.ResourceSet.items:type_name -> ericyaoxr.cmdb.resource.Resource
+	0, // 3: ericyaoxr.cmdb.resource.Base.vendor:type_name -> ericyaoxr.cmdb.resource.Vendor
+	1, // 4: ericyaoxr.cmdb.resource.Base.resource_type:type_name -> ericyaoxr.cmdb.resource.Type
+	7, // 5: ericyaoxr.cmdb.resource.Information.tags:type_name -> ericyaoxr.cmdb.resource.Information.TagsEntry
+	0, // 6: ericyaoxr.cmdb.resource.SearchRequest.vendor:type_name -> ericyaoxr.cmdb.resource.Vendor
+	1, // 7: ericyaoxr.cmdb.resource.SearchRequest.type:type_name -> ericyaoxr.cmdb.resource.Type
+	6, // 8: ericyaoxr.cmdb.resource.Service.Search:input_type -> ericyaoxr.cmdb.resource.SearchRequest
+	3, // 9: ericyaoxr.cmdb.resource.Service.Search:output_type -> ericyaoxr.cmdb.resource.ResourceSet
 	9, // [9:10] is the sub-list for method output_type
 	8, // [8:9] is the sub-list for method input_type
 	8, // [8:8] is the sub-list for extension type_name

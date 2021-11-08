@@ -77,13 +77,13 @@ type CreateSecretRequest struct {
 	Description string `protobuf:"bytes,1,opt,name=description,proto3" json:"description" validate:"required,lte=100"`
 	// 厂商
 	// @gotags: json:"vendor"
-	Vendor resource.Vendor `protobuf:"varint,2,opt,name=vendor,proto3,enum=infraboard.cmdb.resource.Vendor" json:"vendor"`
+	Vendor resource.Vendor `protobuf:"varint,2,opt,name=vendor,proto3,enum=ericyaoxr.cmdb.resource.Vendor" json:"vendor"`
 	// 允许同步的区域
 	// @gotags: json:"allow_regions"
 	AllowRegions []string `protobuf:"bytes,3,rep,name=allow_regions,json=allowRegions,proto3" json:"allow_regions"`
 	// 凭证类型
 	// @gotags: json:"crendential_type"
-	CrendentialType Type `protobuf:"varint,4,opt,name=crendential_type,json=crendentialType,proto3,enum=infraboard.cmdb.secret.Type" json:"crendential_type"`
+	CrendentialType Type `protobuf:"varint,4,opt,name=crendential_type,json=crendentialType,proto3,enum=ericyaoxr.cmdb.secret.Type" json:"crendential_type"`
 	// 服务地址, 云商不用填写
 	// @gotags: json:"address"
 	Address string `protobuf:"bytes,5,opt,name=address,proto3" json:"address"`
@@ -202,13 +202,13 @@ type Secret struct {
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description" validate:"required,lte=100"`
 	// 厂商
 	// @gotags: json:"vendor"
-	Vendor resource.Vendor `protobuf:"varint,4,opt,name=vendor,proto3,enum=infraboard.cmdb.resource.Vendor" json:"vendor"`
+	Vendor resource.Vendor `protobuf:"varint,4,opt,name=vendor,proto3,enum=ericyaoxr.cmdb.resource.Vendor" json:"vendor"`
 	// 允许同步的区域
 	// @gotags: json:"allow_regions"
 	AllowRegions []string `protobuf:"bytes,5,rep,name=allow_regions,json=allowRegions,proto3" json:"allow_regions"`
 	// 凭证类型
 	// @gotags: json:"crendential_type"
-	CrendentialType Type `protobuf:"varint,6,opt,name=crendential_type,json=crendentialType,proto3,enum=infraboard.cmdb.secret.Type" json:"crendential_type"`
+	CrendentialType Type `protobuf:"varint,6,opt,name=crendential_type,json=crendentialType,proto3,enum=ericyaoxr.cmdb.secret.Type" json:"crendential_type"`
 	// 服务地址, 云商不用填写
 	// @gotags: json:"address"
 	Address string `protobuf:"bytes,7,opt,name=address,proto3" json:"address"`
@@ -660,29 +660,29 @@ func file_app_secret_pb_secret_proto_rawDescGZIP() []byte {
 var file_app_secret_pb_secret_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_app_secret_pb_secret_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_app_secret_pb_secret_proto_goTypes = []interface{}{
-	(Type)(0),                     // 0: infraboard.cmdb.secret.Type
-	(*CreateSecretRequest)(nil),   // 1: infraboard.cmdb.secret.CreateSecretRequest
-	(*Secret)(nil),                // 2: infraboard.cmdb.secret.Secret
-	(*QuerySecretRequest)(nil),    // 3: infraboard.cmdb.secret.QuerySecretRequest
-	(*SecretSet)(nil),             // 4: infraboard.cmdb.secret.SecretSet
-	(*DescribeSecretRequest)(nil), // 5: infraboard.cmdb.secret.DescribeSecretRequest
-	(*DeleteSecretRequest)(nil),   // 6: infraboard.cmdb.secret.DeleteSecretRequest
-	(resource.Vendor)(0),          // 7: infraboard.cmdb.resource.Vendor
+	(Type)(0),                     // 0: ericyaoxr.cmdb.secret.Type
+	(*CreateSecretRequest)(nil),   // 1: ericyaoxr.cmdb.secret.CreateSecretRequest
+	(*Secret)(nil),                // 2: ericyaoxr.cmdb.secret.Secret
+	(*QuerySecretRequest)(nil),    // 3: ericyaoxr.cmdb.secret.QuerySecretRequest
+	(*SecretSet)(nil),             // 4: ericyaoxr.cmdb.secret.SecretSet
+	(*DescribeSecretRequest)(nil), // 5: ericyaoxr.cmdb.secret.DescribeSecretRequest
+	(*DeleteSecretRequest)(nil),   // 6: ericyaoxr.cmdb.secret.DeleteSecretRequest
+	(resource.Vendor)(0),          // 7: ericyaoxr.cmdb.resource.Vendor
 }
 var file_app_secret_pb_secret_proto_depIdxs = []int32{
-	7, // 0: infraboard.cmdb.secret.CreateSecretRequest.vendor:type_name -> infraboard.cmdb.resource.Vendor
-	0, // 1: infraboard.cmdb.secret.CreateSecretRequest.crendential_type:type_name -> infraboard.cmdb.secret.Type
-	7, // 2: infraboard.cmdb.secret.Secret.vendor:type_name -> infraboard.cmdb.resource.Vendor
-	0, // 3: infraboard.cmdb.secret.Secret.crendential_type:type_name -> infraboard.cmdb.secret.Type
-	2, // 4: infraboard.cmdb.secret.SecretSet.items:type_name -> infraboard.cmdb.secret.Secret
-	1, // 5: infraboard.cmdb.secret.Service.CreateSecret:input_type -> infraboard.cmdb.secret.CreateSecretRequest
-	3, // 6: infraboard.cmdb.secret.Service.QuerySecret:input_type -> infraboard.cmdb.secret.QuerySecretRequest
-	5, // 7: infraboard.cmdb.secret.Service.DescribeSecret:input_type -> infraboard.cmdb.secret.DescribeSecretRequest
-	6, // 8: infraboard.cmdb.secret.Service.DeleteSecret:input_type -> infraboard.cmdb.secret.DeleteSecretRequest
-	2, // 9: infraboard.cmdb.secret.Service.CreateSecret:output_type -> infraboard.cmdb.secret.Secret
-	4, // 10: infraboard.cmdb.secret.Service.QuerySecret:output_type -> infraboard.cmdb.secret.SecretSet
-	2, // 11: infraboard.cmdb.secret.Service.DescribeSecret:output_type -> infraboard.cmdb.secret.Secret
-	2, // 12: infraboard.cmdb.secret.Service.DeleteSecret:output_type -> infraboard.cmdb.secret.Secret
+	7, // 0: ericyaoxr.cmdb.secret.CreateSecretRequest.vendor:type_name -> ericyaoxr.cmdb.resource.Vendor
+	0, // 1: ericyaoxr.cmdb.secret.CreateSecretRequest.crendential_type:type_name -> ericyaoxr.cmdb.secret.Type
+	7, // 2: ericyaoxr.cmdb.secret.Secret.vendor:type_name -> ericyaoxr.cmdb.resource.Vendor
+	0, // 3: ericyaoxr.cmdb.secret.Secret.crendential_type:type_name -> ericyaoxr.cmdb.secret.Type
+	2, // 4: ericyaoxr.cmdb.secret.SecretSet.items:type_name -> ericyaoxr.cmdb.secret.Secret
+	1, // 5: ericyaoxr.cmdb.secret.Service.CreateSecret:input_type -> ericyaoxr.cmdb.secret.CreateSecretRequest
+	3, // 6: ericyaoxr.cmdb.secret.Service.QuerySecret:input_type -> ericyaoxr.cmdb.secret.QuerySecretRequest
+	5, // 7: ericyaoxr.cmdb.secret.Service.DescribeSecret:input_type -> ericyaoxr.cmdb.secret.DescribeSecretRequest
+	6, // 8: ericyaoxr.cmdb.secret.Service.DeleteSecret:input_type -> ericyaoxr.cmdb.secret.DeleteSecretRequest
+	2, // 9: ericyaoxr.cmdb.secret.Service.CreateSecret:output_type -> ericyaoxr.cmdb.secret.Secret
+	4, // 10: ericyaoxr.cmdb.secret.Service.QuerySecret:output_type -> ericyaoxr.cmdb.secret.SecretSet
+	2, // 11: ericyaoxr.cmdb.secret.Service.DescribeSecret:output_type -> ericyaoxr.cmdb.secret.Secret
+	2, // 12: ericyaoxr.cmdb.secret.Service.DeleteSecret:output_type -> ericyaoxr.cmdb.secret.Secret
 	9, // [9:13] is the sub-list for method output_type
 	5, // [5:9] is the sub-list for method input_type
 	5, // [5:5] is the sub-list for extension type_name

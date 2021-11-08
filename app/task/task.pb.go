@@ -90,7 +90,7 @@ type Task struct {
 	Region string `protobuf:"bytes,2,opt,name=region,proto3" json:"region"`
 	// 同步的资源
 	// @gotags: json:"resource_type"
-	ResourceType resource.Type `protobuf:"varint,3,opt,name=resource_type,json=resourceType,proto3,enum=infraboard.cmdb.resource.Type" json:"resource_type"`
+	ResourceType resource.Type `protobuf:"varint,3,opt,name=resource_type,json=resourceType,proto3,enum=ericyaoxr.cmdb.resource.Type" json:"resource_type"`
 	// 关联secret
 	// @gotags: json:"secret_id"
 	SecretId string `protobuf:"bytes,4,opt,name=secret_id,json=secretId,proto3" json:"secret_id"`
@@ -102,7 +102,7 @@ type Task struct {
 	Timeout int32 `protobuf:"varint,6,opt,name=timeout,proto3" json:"timeout"`
 	// 任务状态
 	// @gotags: json:"status"
-	Status Status `protobuf:"varint,7,opt,name=status,proto3,enum=infraboard.cmdb.task.Status" json:"status"`
+	Status Status `protobuf:"varint,7,opt,name=status,proto3,enum=ericyaoxr.cmdb.task.Status" json:"status"`
 	// 失败时的异常信息
 	// @gotags: json:"message"
 	Message string `protobuf:"bytes,8,opt,name=message,proto3" json:"message"`
@@ -382,7 +382,7 @@ type QueryTaskRequest struct {
 	// @gotags: json:"page_number"
 	PageNumber uint64 `protobuf:"varint,2,opt,name=page_number,json=pageNumber,proto3" json:"page_number"`
 	// @gotags: json:"resource_type"
-	ResourceType resource.Type `protobuf:"varint,3,opt,name=resource_type,json=resourceType,proto3,enum=infraboard.cmdb.resource.Type" json:"resource_type"`
+	ResourceType resource.Type `protobuf:"varint,3,opt,name=resource_type,json=resourceType,proto3,enum=ericyaoxr.cmdb.resource.Type" json:"resource_type"`
 	// @gotags: json:"keywords"
 	Keywords string `protobuf:"bytes,4,opt,name=keywords,proto3" json:"keywords"`
 }
@@ -457,7 +457,7 @@ type CreateTaskRequst struct {
 	// @gotags: json:"region"
 	Region string `protobuf:"bytes,2,opt,name=region,proto3" json:"region"`
 	// @gotags: json:"resource_type"
-	ResourceType resource.Type `protobuf:"varint,3,opt,name=resource_type,json=resourceType,proto3,enum=infraboard.cmdb.resource.Type" json:"resource_type"`
+	ResourceType resource.Type `protobuf:"varint,3,opt,name=resource_type,json=resourceType,proto3,enum=ericyaoxr.cmdb.resource.Type" json:"resource_type"`
 	// @gotags: json:"timeout"
 	Timeout int64 `protobuf:"varint,4,opt,name=timeout,proto3" json:"timeout"`
 }
@@ -628,25 +628,25 @@ func file_app_task_pb_task_proto_rawDescGZIP() []byte {
 var file_app_task_pb_task_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_app_task_pb_task_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_app_task_pb_task_proto_goTypes = []interface{}{
-	(Status)(0),              // 0: infraboard.cmdb.task.Status
-	(*Task)(nil),             // 1: infraboard.cmdb.task.Task
-	(*Detail)(nil),           // 2: infraboard.cmdb.task.Detail
-	(*TaskSet)(nil),          // 3: infraboard.cmdb.task.TaskSet
-	(*QueryTaskRequest)(nil), // 4: infraboard.cmdb.task.QueryTaskRequest
-	(*CreateTaskRequst)(nil), // 5: infraboard.cmdb.task.CreateTaskRequst
-	(resource.Type)(0),       // 6: infraboard.cmdb.resource.Type
+	(Status)(0),              // 0: ericyaoxr.cmdb.task.Status
+	(*Task)(nil),             // 1: ericyaoxr.cmdb.task.Task
+	(*Detail)(nil),           // 2: ericyaoxr.cmdb.task.Detail
+	(*TaskSet)(nil),          // 3: ericyaoxr.cmdb.task.TaskSet
+	(*QueryTaskRequest)(nil), // 4: ericyaoxr.cmdb.task.QueryTaskRequest
+	(*CreateTaskRequst)(nil), // 5: ericyaoxr.cmdb.task.CreateTaskRequst
+	(resource.Type)(0),       // 6: ericyaoxr.cmdb.resource.Type
 }
 var file_app_task_pb_task_proto_depIdxs = []int32{
-	6, // 0: infraboard.cmdb.task.Task.resource_type:type_name -> infraboard.cmdb.resource.Type
-	0, // 1: infraboard.cmdb.task.Task.status:type_name -> infraboard.cmdb.task.Status
-	2, // 2: infraboard.cmdb.task.Task.details:type_name -> infraboard.cmdb.task.Detail
-	1, // 3: infraboard.cmdb.task.TaskSet.items:type_name -> infraboard.cmdb.task.Task
-	6, // 4: infraboard.cmdb.task.QueryTaskRequest.resource_type:type_name -> infraboard.cmdb.resource.Type
-	6, // 5: infraboard.cmdb.task.CreateTaskRequst.resource_type:type_name -> infraboard.cmdb.resource.Type
-	4, // 6: infraboard.cmdb.task.Service.QueryTask:input_type -> infraboard.cmdb.task.QueryTaskRequest
-	5, // 7: infraboard.cmdb.task.Service.CreatTask:input_type -> infraboard.cmdb.task.CreateTaskRequst
-	3, // 8: infraboard.cmdb.task.Service.QueryTask:output_type -> infraboard.cmdb.task.TaskSet
-	1, // 9: infraboard.cmdb.task.Service.CreatTask:output_type -> infraboard.cmdb.task.Task
+	6, // 0: ericyaoxr.cmdb.task.Task.resource_type:type_name -> ericyaoxr.cmdb.resource.Type
+	0, // 1: ericyaoxr.cmdb.task.Task.status:type_name -> ericyaoxr.cmdb.task.Status
+	2, // 2: ericyaoxr.cmdb.task.Task.details:type_name -> ericyaoxr.cmdb.task.Detail
+	1, // 3: ericyaoxr.cmdb.task.TaskSet.items:type_name -> ericyaoxr.cmdb.task.Task
+	6, // 4: ericyaoxr.cmdb.task.QueryTaskRequest.resource_type:type_name -> ericyaoxr.cmdb.resource.Type
+	6, // 5: ericyaoxr.cmdb.task.CreateTaskRequst.resource_type:type_name -> ericyaoxr.cmdb.resource.Type
+	4, // 6: ericyaoxr.cmdb.task.Service.QueryTask:input_type -> ericyaoxr.cmdb.task.QueryTaskRequest
+	5, // 7: ericyaoxr.cmdb.task.Service.CreatTask:input_type -> ericyaoxr.cmdb.task.CreateTaskRequst
+	3, // 8: ericyaoxr.cmdb.task.Service.QueryTask:output_type -> ericyaoxr.cmdb.task.TaskSet
+	1, // 9: ericyaoxr.cmdb.task.Service.CreatTask:output_type -> ericyaoxr.cmdb.task.Task
 	8, // [8:10] is the sub-list for method output_type
 	6, // [6:8] is the sub-list for method input_type
 	6, // [6:6] is the sub-list for extension type_name
