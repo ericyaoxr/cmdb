@@ -13,12 +13,12 @@ import (
 	"github.com/ericyaoxr/mcube/logger"
 	"github.com/ericyaoxr/mcube/logger/zap"
 
+	pkg "github.com/ericyaoxr/cmdb/app"
+	"github.com/ericyaoxr/cmdb/app/host/impl"
+	searcher "github.com/ericyaoxr/cmdb/app/resource/impl"
+	secretImpl "github.com/ericyaoxr/cmdb/app/secret/impl"
+	taskImpl "github.com/ericyaoxr/cmdb/app/task/impl"
 	"github.com/ericyaoxr/cmdb/conf"
-	"github.com/ericyaoxr/cmdb/pkg"
-	"github.com/ericyaoxr/cmdb/pkg/host/impl"
-	searcher "github.com/ericyaoxr/cmdb/pkg/resource/impl"
-	secretImpl "github.com/ericyaoxr/cmdb/pkg/secret/impl"
-	taskImpl "github.com/ericyaoxr/cmdb/pkg/task/impl"
 	"github.com/ericyaoxr/cmdb/protocol"
 )
 

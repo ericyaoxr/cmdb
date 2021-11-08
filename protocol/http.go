@@ -11,11 +11,11 @@ import (
 	"github.com/julienschmidt/httprouter"
 	"github.com/rs/cors"
 
+	hostAPI "github.com/ericyaoxr/cmdb/app/host/http"
+	searchAPI "github.com/ericyaoxr/cmdb/app/resource/http"
+	secretAPI "github.com/ericyaoxr/cmdb/app/secret/http"
+	taskAPI "github.com/ericyaoxr/cmdb/app/task/http"
 	"github.com/ericyaoxr/cmdb/conf"
-	hostAPI "github.com/ericyaoxr/cmdb/pkg/host/http"
-	searchAPI "github.com/ericyaoxr/cmdb/pkg/resource/http"
-	secretAPI "github.com/ericyaoxr/cmdb/pkg/secret/http"
-	taskAPI "github.com/ericyaoxr/cmdb/pkg/task/http"
 )
 
 // NewHTTPService 构建函数

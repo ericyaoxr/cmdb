@@ -4,7 +4,7 @@ import (
 	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common"
 	cvm "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/cvm/v20170312"
 
-	"github.com/ericyaoxr/cmdb/pkg/host"
+	"github.com/ericyaoxr/cmdb/app/host"
 	"github.com/ericyaoxr/mcube/logger"
 	"github.com/ericyaoxr/mcube/logger/zap"
 )

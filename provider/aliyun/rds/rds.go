@@ -5,8 +5,8 @@ import (
 
 	"github.com/aliyun/alibaba-cloud-sdk-go/services/rds"
 
-	cmdbRds "github.com/ericyaoxr/cmdb/pkg/rds"
-	"github.com/ericyaoxr/cmdb/pkg/resource"
+	cmdbRds "github.com/ericyaoxr/cmdb/app/rds"
+	"github.com/ericyaoxr/cmdb/app/resource"
 	"github.com/ericyaoxr/mcube/logger"
 	"github.com/ericyaoxr/mcube/logger/zap"
 )
@@ -33,7 +33,7 @@ func (o *RdsOperater) transferSet(items []rds.DBInstance) *cmdbRds.RdsSet {
 
 func (o *RdsOperater) transferOne(ins rds.DBInstance) *cmdbRds.Rds {
 	r := cmdbRds.NewDefaultRds()
-	r.Base.Vendor = resource.VendorAliYun
+	r.Base.Vendor = resource.Vendor_ALIYUN
 	r.Base.Region = ins.RegionId
 	r.Base.Zone = ins.ZoneId
 	r.Base.CreateAt = o.parseTime(ins.CreateTime)

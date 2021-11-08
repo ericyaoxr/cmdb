@@ -3,7 +3,7 @@ package cdb
 import (
 	cdb "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/cdb/v20170320"
 
-	"github.com/ericyaoxr/cmdb/pkg/rds"
+	"github.com/ericyaoxr/cmdb/app/rds"
 )
 
 func NewCDBOperater(client *cdb.Client) *CDBOperater {
