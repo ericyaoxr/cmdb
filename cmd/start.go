@@ -13,20 +13,18 @@ import (
 	"github.com/ericyaoxr/mcube/logger"
 	"github.com/ericyaoxr/mcube/logger/zap"
 
-	pkg "github.com/ericyaoxr/cmdb/app"
-	"github.com/ericyaoxr/cmdb/app/host/impl"
-	searcher "github.com/ericyaoxr/cmdb/app/resource/impl"
-	secretImpl "github.com/ericyaoxr/cmdb/app/secret/impl"
-	taskImpl "github.com/ericyaoxr/cmdb/app/task/impl"
 	"github.com/ericyaoxr/cmdb/conf"
 	"github.com/ericyaoxr/cmdb/protocol"
+
+	// 注册所有服务
+	_ "github.com/ericyaoxr/cmdb/app/all"
 )
 
 // startCmd represents the start command
 var serviceCmd = &cobra.Command{
 	Use:   "start",
-	Short: "Demo后端API服务",
-	Long:  `Demo后端API服务`,
+	Short: "CMDB后端API服务",
+	Long:  `CMDB后端API服务`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		// 初始化全局变量
 		if err := loadGlobalConfig(confType); err != nil {
@@ -37,30 +35,6 @@ var serviceCmd = &cobra.Command{
 		if err := loadGlobalLogger(); err != nil {
 			return err
 		}
-
-		// 初始化服务层 Ioc初始化
-		if err := impl.Service.Config(); err != nil {
-			return err
-		}
-		pkg.Host = impl.Service
-
-		// Secret Service
-		if err := secretImpl.Service.Config(); err != nil {
-			return err
-		}
-		pkg.Secret = secretImpl.Service
-
-		// Task Service
-		if err := taskImpl.Service.Config(); err != nil {
-			return err
-		}
-		pkg.Task = taskImpl.Service
-
-		// resource Service
-		if err := searcher.Service.Config(); err != nil {
-			return err
-		}
-		pkg.Resource = searcher.Service
 
 		// 启动服务
 		ch := make(chan os.Signal, 1)
@@ -86,8 +60,10 @@ var serviceCmd = &cobra.Command{
 
 func newService(cnf *conf.Config) (*service, error) {
 	http := protocol.NewHTTPService()
+	grpc := protocol.NewGRPCService()
 	svr := &service{
 		http: http,
+		grpc: grpc,
 		log:  zap.L().Named("CLI"),
 	}
 
@@ -96,10 +72,12 @@ func newService(cnf *conf.Config) (*service, error) {
 
 type service struct {
 	http *protocol.HTTPService
+	grpc *protocol.GRPCService
 	log  logger.Logger
 }
 
 func (s *service) start() error {
+	go s.grpc.Start()
 	return s.http.Start()
 }
 

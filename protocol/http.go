@@ -8,19 +8,23 @@ import (
 
 	"github.com/ericyaoxr/mcube/logger"
 	"github.com/ericyaoxr/mcube/logger/zap"
-	"github.com/julienschmidt/httprouter"
-	"github.com/rs/cors"
 
-	hostAPI "github.com/ericyaoxr/cmdb/app/host/http"
-	searchAPI "github.com/ericyaoxr/cmdb/app/resource/http"
-	secretAPI "github.com/ericyaoxr/cmdb/app/secret/http"
-	taskAPI "github.com/ericyaoxr/cmdb/app/task/http"
+	"github.com/ericyaoxr/cmdb/app"
 	"github.com/ericyaoxr/cmdb/conf"
+	"github.com/ericyaoxr/mcube/http/middleware/accesslog"
+	"github.com/ericyaoxr/mcube/http/middleware/cors"
+	"github.com/ericyaoxr/mcube/http/middleware/recovery"
+	"github.com/ericyaoxr/mcube/http/router"
+	"github.com/ericyaoxr/mcube/http/router/httprouter"
 )
 
 // NewHTTPService 构建函数
 func NewHTTPService() *HTTPService {
 	r := httprouter.New()
+	r.Use(recovery.NewWithLogger(zap.L().Named("Recovery")))
+	r.Use(accesslog.NewWithLogger(zap.L().Named("AccessLog")))
+	r.Use(cors.AllowAll())
+	r.EnableAPIRoot()
 
 	server := &http.Server{
 		ReadHeaderTimeout: 60 * time.Second,
@@ -28,20 +32,20 @@ func NewHTTPService() *HTTPService {
 		WriteTimeout:      60 * time.Second,
 		IdleTimeout:       60 * time.Second,
 		MaxHeaderBytes:    1 << 20, // 1M
-		Addr:              conf.C().App.Addr(),
+		Addr:              conf.C().App.HTTPAddr(),
 		Handler:           cors.AllowAll().Handler(r),
 	}
 	return &HTTPService{
 		r:      r,
 		server: server,
-		l:      zap.L().Named("API"),
+		l:      zap.L().Named("HTTP Service"),
 		c:      conf.C(),
 	}
 }
 
 // HTTPService http服务
 type HTTPService struct {
-	r      *httprouter.Router
+	r      router.Router
 	l      logger.Logger
 	c      *conf.Config
 	server *http.Server
@@ -50,10 +54,9 @@ type HTTPService struct {
 // Start 启动服务
 func (s *HTTPService) Start() error {
 	// 装置子服务路由
-	hostAPI.RegistAPI(s.r)
-	secretAPI.RegistAPI(s.r)
-	taskAPI.RegistAPI(s.r)
-	searchAPI.RegistAPI(s.r)
+	if err := app.LoadHttpApp(s.c.App.Name, s.r); err != nil {
+		return err
+	}
 
 	// 启动 HTTP服务
 	s.l.Infof("HTTP服务启动成功, 监听地址: %s", s.server.Addr)

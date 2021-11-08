@@ -3,6 +3,8 @@ package impl
 import (
 	"database/sql"
 
+	"github.com/ericyaoxr/cmdb/app"
+	"github.com/ericyaoxr/cmdb/app/host"
 	"github.com/ericyaoxr/cmdb/conf"
 	"github.com/ericyaoxr/mcube/logger"
 	"github.com/ericyaoxr/mcube/logger/zap"

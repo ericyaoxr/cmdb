@@ -1,13 +1,19 @@
 package resource
 
 import (
-	"context"
 	"net/http"
 	"strconv"
 )
 
-type Service interface {
-	Search(context.Context, *SearchRequest) (*ResourceSet, error)
+const (
+	AppName = "Resource"
+)
+
+func NewSearchRequest() *SearchRequest {
+	return &SearchRequest{
+		PageSize:   20,
+		PageNumber: 1,
+	}
 }
 
 func NewSearchRequestFromHTTP(r *http.Request) *SearchRequest {

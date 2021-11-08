@@ -38,9 +38,9 @@ func (s *service) syncHost(ctx context.Context, secret *secret.Secret, t *task.T
 
 	hs := host.NewHostSet()
 	switch secret.Vendor {
-	case resource.VendorAliYun:
+	case resource.Vendor_ALIYUN:
 		s.log.Debugf("sync aliyun host ...")
-		client := aliConn.NewAliCloudClient(secret.APIKey, secret.APISecret, t.Region)
+		client := aliConn.NewAliCloudClient(secret.ApiKey, secret.ApiSecret, t.Region)
 		ec, err := client.EcsClient()
 		if err != nil {
 			t.Failed(err.Error())
@@ -48,11 +48,11 @@ func (s *service) syncHost(ctx context.Context, secret *secret.Secret, t *task.T
 		}
 		operater := ecsOp.NewEcsOperater(ec)
 		req := ecsOp.NewPageQueryRequest()
-		req.Rate = secret.RequestRate
+		req.Rate = int(secret.RequestRate)
 		pager = operater.PageQuery(req)
-	case resource.VendorTencent:
+	case resource.Vendor_TENCENT:
 		s.log.Debugf("sync txyun host ...")
-		client := txConn.NewTencentCloudClient(secret.APIKey, secret.APISecret, t.Region)
+		client := txConn.NewTencentCloudClient(secret.ApiKey, secret.ApiSecret, t.Region)
 		operater := cvmOp.NewCVMOperater(client.CvmClient())
 		pager = operater.PageQuery()
 	default:
@@ -84,9 +84,9 @@ func (s *service) syncHost(ctx context.Context, secret *secret.Secret, t *task.T
 		target := hs.Items[i]
 		_, err := s.host.SaveHost(ctx, target)
 		if err != nil {
-			t.AddDetailFailed(target.Name, err.Error())
+			t.AddDetailFailed(target.Information.Name, err.Error())
 		} else {
-			t.AddDetailSucceed(target.Name, "")
+			t.AddDetailSucceed(target.Information.Name, "")
 		}
 	}
 }
