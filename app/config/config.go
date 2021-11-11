@@ -9,7 +9,7 @@ import (
 
 func NewDefaultConfig() *Config {
 	return &Config{
-		Describe: &Describe{},
+		// Describe: &Describe{},
 	}
 }
 
@@ -46,7 +46,7 @@ func (h *Config) GenHash() error {
 	}
 	hash.Write(b)
 
-	b, err = json.Marshal(h.Describe)
+	b, err = json.Marshal(h)
 	if err != nil {
 		return err
 	}

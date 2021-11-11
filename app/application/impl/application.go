@@ -15,18 +15,18 @@ import (
 
 const (
 	insertApplicationSQL = `INSERT INTO application (
-		id,name,repo,branch,module,topics,job,
+		id,name,repo,branch,module,topic,job,
 		description,create_at,update_at,
 		status
 	) VALUES (?,?,?,?,?,?,?,?,?,?,?);`
 	updateApplicationSQL = `UPDATE application SET 
-	name=?,repo=?,branch=?,module=?,topics=?,
+	name=?,repo=?,branch=?,module=?,topic=?,
 	job=?,description=?,create_at=?,update_at=?,
 	status=?
 	WHERE id = ?`
 
-	queryApplicationSQL  = `SELECT * FROM application`
-	deleteApplicationSQL = `DELETE FROM application WHERE id = ?;`
+	queryApplicationSQL  = `SELECT * FROM application as a`
+	deleteApplicationSQL = `DELETE FROM application as a WHERE a.id = ?;`
 )
 
 func (s *service) SaveApplication(ctx context.Context, h *application.Application) (

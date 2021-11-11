@@ -127,7 +127,7 @@ type Describe struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// 关联Resource
+	// 配置项ID
 	// @gotags: json:"id"
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// 关联Application
@@ -329,8 +329,10 @@ type ConfigSet struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// @gotags: json:"items"
 	Items []*Config `protobuf:"bytes,1,rep,name=items,proto3" json:"items,omitempty"`
-	Total int64     `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	// @gotags: json:"total"
+	Total int64 `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
 }
 
 func (x *ConfigSet) Reset() {
@@ -450,6 +452,7 @@ type UpdateConfigData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// @gotags: json:"id" validate:"required"
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 }
 

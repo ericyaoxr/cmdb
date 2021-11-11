@@ -24,7 +24,7 @@ message Config {
 }
 
 message Describe {
-    // 关联Resource
+    // 配置项ID
 	// @gotags: json:"id"
     string id = 1;
     // 关联Application
@@ -63,7 +63,9 @@ message QueryConfigRequest {
 }
 
 message ConfigSet {
+    // @gotags: json:"items"
     repeated Config items = 1;
+    // @gotags: json:"total"
     int64 total = 2;
 }
 
@@ -77,6 +79,7 @@ message UpdateConfigRequest {
 }
 
 message UpdateConfigData {
+    // @gotags: json:"id" validate:"required"
     string id = 1;
 }
 

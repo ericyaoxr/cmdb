@@ -16,7 +16,6 @@ func (s *service) save(ctx context.Context, h *host.Host) error {
 
 	// 开启一个事务
 	// 文档请参考: http://cngolib.com/database-sql.html#db-begintx
-	// 关于事务级别可以参考文章: https://zhuanlan.zhihu.com/p/117476959
 	// wiki: https://en.wikipedia.org/wiki/Isolation_(database_systems)#Isolation_levels
 	tx, err := s.db.BeginTx(ctx, nil)
 	if err != nil {

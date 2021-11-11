@@ -37,8 +37,9 @@ func (s *service) save(ctx context.Context, conf *config.Config) error {
 	}
 	defer stmt.Close()
 
+	desc := conf.Describe
 	_, err = stmt.Exec(
-		conf.Describe.Id, &conf.Describe.ApplicationId, &conf.Describe.Name, &conf.Describe.Host, &conf.Describe.Port, &conf.Describe.Env, &conf.Describe.Type, &conf.Describe.Source, &conf.Describe.CreateAt, &conf.Describe.UpdateAt,
+		desc.Id, desc.ApplicationId, desc.Name, desc.Host, desc.Port, desc.Env, desc.Type, desc.Source, desc.CreateAt, desc.UpdateAt,
 	)
 	if err != nil {
 		return fmt.Errorf("save config info error, %s", err)
