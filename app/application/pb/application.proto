@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+package ericyaoxr.cmdb.application;
+option go_package="github.com/ericyaoxr/cmdb/app/application" ;
+
+service Service {
+    rpc SaveApplication(Application) returns(Application) {}
+    rpc QueryApplication(QueryApplicationRequest) returns(ApplicationSet) {}
+    rpc UpdateApplication(UpdateApplicationRequest) returns(Application) {}
+    rpc DescribeApplication(DescribeApplicationRequest) returns(Application) {}
+    rpc DeleteApplication(DeleteApplicationRequest) returns(Application) {}
+}
+
+enum UpdateMode {
+    PUT = 0;
+    PATCH = 1;
+}
+
+message Application {
+	// ApplicationID
+	// @gotags: json:"id"
+    string id = 1;
+	// 应用名称
+	// @gotags: json:"name"
+    string name = 2;
+	// 仓库
+	// @gotags: json:"repo"
+    string repo = 3;
+	// 分支
+	// @gotags: json:"branch"
+    string branch = 4;
+	// 模块
+	// @gotags: json:"module"
+    string module = 5;
+	// 主题标签
+	// @gotags: json:"topic"
+    string topic = 6;
+	// 关联发布任务
+	// @gotags: json:"job"
+    string job = 7;
+	// 描述
+	// @gotags: json:"description"
+    string description = 8;
+	// 创建时间
+	// @gotags: json:"create_at"
+    int64 create_at = 9;
+	// 创建时间
+	// @gotags: json:"update_at"
+    int64 update_at = 10;
+	// 状态
+	// @gotags: json:"status"
+    string status = 11;
+}
+message QueryApplicationRequest {
+    uint64 page_size = 1;
+    uint64 page_number = 2;
+    string keywords = 3;
+}
+message ApplicationSet {
+    // @gotags: json:"items"
+    repeated Application items = 1;
+    // @gotags: json:"total"
+    int64 total = 2;
+}
+
+message UpdateApplicationRequest {
+    // @gotags: json:"id" validate:"required"
+    string id = 1;
+    // @gotags: json:"update_mode"
+    UpdateMode update_mode = 2;
+    // @gotags: json:"data" validate:"required"
+    UpdateApplicationData update_application_data = 3;
+}
+
+message UpdateApplicationData {
+    // @gotags: json:"id" validate:"required"
+    string id = 1;
+}
+
+message DescribeApplicationRequest {
+    // @gotags: json:"id" validate:"required"
+    string id = 1;
+}
+
+message DeleteApplicationRequest {
+    // @gotags: json:"id" validate:"required"
+    string id = 1;
+}

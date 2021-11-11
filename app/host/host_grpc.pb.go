@@ -35,7 +35,7 @@ func NewServiceClient(cc grpc.ClientConnInterface) ServiceClient {
 
 func (c *serviceClient) SaveHost(ctx context.Context, in *Host, opts ...grpc.CallOption) (*Host, error) {
 	out := new(Host)
-	err := c.cc.Invoke(ctx, "/infraboard.cmdb.host.Service/SaveHost", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/ericyaoxr.cmdb.host.Service/SaveHost", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -44,7 +44,7 @@ func (c *serviceClient) SaveHost(ctx context.Context, in *Host, opts ...grpc.Cal
 
 func (c *serviceClient) QueryHost(ctx context.Context, in *QueryHostRequest, opts ...grpc.CallOption) (*HostSet, error) {
 	out := new(HostSet)
-	err := c.cc.Invoke(ctx, "/infraboard.cmdb.host.Service/QueryHost", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/ericyaoxr.cmdb.host.Service/QueryHost", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ func (c *serviceClient) QueryHost(ctx context.Context, in *QueryHostRequest, opt
 
 func (c *serviceClient) UpdateHost(ctx context.Context, in *UpdateHostRequest, opts ...grpc.CallOption) (*Host, error) {
 	out := new(Host)
-	err := c.cc.Invoke(ctx, "/infraboard.cmdb.host.Service/UpdateHost", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/ericyaoxr.cmdb.host.Service/UpdateHost", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ func (c *serviceClient) UpdateHost(ctx context.Context, in *UpdateHostRequest, o
 
 func (c *serviceClient) DescribeHost(ctx context.Context, in *DescribeHostRequest, opts ...grpc.CallOption) (*Host, error) {
 	out := new(Host)
-	err := c.cc.Invoke(ctx, "/infraboard.cmdb.host.Service/DescribeHost", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/ericyaoxr.cmdb.host.Service/DescribeHost", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +71,7 @@ func (c *serviceClient) DescribeHost(ctx context.Context, in *DescribeHostReques
 
 func (c *serviceClient) DeleteHost(ctx context.Context, in *DeleteHostRequest, opts ...grpc.CallOption) (*Host, error) {
 	out := new(Host)
-	err := c.cc.Invoke(ctx, "/infraboard.cmdb.host.Service/DeleteHost", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/ericyaoxr.cmdb.host.Service/DeleteHost", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -132,7 +132,7 @@ func _Service_SaveHost_Handler(srv interface{}, ctx context.Context, dec func(in
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/infraboard.cmdb.host.Service/SaveHost",
+		FullMethod: "/ericyaoxr.cmdb.host.Service/SaveHost",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ServiceServer).SaveHost(ctx, req.(*Host))
@@ -150,7 +150,7 @@ func _Service_QueryHost_Handler(srv interface{}, ctx context.Context, dec func(i
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/infraboard.cmdb.host.Service/QueryHost",
+		FullMethod: "/ericyaoxr.cmdb.host.Service/QueryHost",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ServiceServer).QueryHost(ctx, req.(*QueryHostRequest))
@@ -168,7 +168,7 @@ func _Service_UpdateHost_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/infraboard.cmdb.host.Service/UpdateHost",
+		FullMethod: "/ericyaoxr.cmdb.host.Service/UpdateHost",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ServiceServer).UpdateHost(ctx, req.(*UpdateHostRequest))
@@ -186,7 +186,7 @@ func _Service_DescribeHost_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/infraboard.cmdb.host.Service/DescribeHost",
+		FullMethod: "/ericyaoxr.cmdb.host.Service/DescribeHost",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ServiceServer).DescribeHost(ctx, req.(*DescribeHostRequest))
@@ -204,7 +204,7 @@ func _Service_DeleteHost_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/infraboard.cmdb.host.Service/DeleteHost",
+		FullMethod: "/ericyaoxr.cmdb.host.Service/DeleteHost",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ServiceServer).DeleteHost(ctx, req.(*DeleteHostRequest))
@@ -216,7 +216,7 @@ func _Service_DeleteHost_Handler(srv interface{}, ctx context.Context, dec func(
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Service_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "infraboard.cmdb.host.Service",
+	ServiceName: "ericyaoxr.cmdb.host.Service",
 	HandlerType: (*ServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

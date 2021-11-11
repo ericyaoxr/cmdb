@@ -412,7 +412,7 @@ type UpdateHostRequest struct {
 	// @gotags: json:"id" validate:"required"
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id" validate:"required"`
 	// @gotags: json:"update_mode"
-	UpdateMode UpdateMode `protobuf:"varint,2,opt,name=update_mode,json=updateMode,proto3,enum=infraboard.cmdb.host.UpdateMode" json:"update_mode"`
+	UpdateMode UpdateMode `protobuf:"varint,2,opt,name=update_mode,json=updateMode,proto3,enum=ericyaoxr.cmdb.host.UpdateMode" json:"update_mode"`
 	// @gotags: json:"data" validate:"required"
 	UpdateHostData *UpdateHostData `protobuf:"bytes,3,opt,name=update_host_data,json=updateHostData,proto3" json:"data" validate:"required"`
 }
@@ -757,37 +757,37 @@ func file_app_host_pb_host_proto_rawDescGZIP() []byte {
 var file_app_host_pb_host_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_app_host_pb_host_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_app_host_pb_host_proto_goTypes = []interface{}{
-	(UpdateMode)(0),              // 0: infraboard.cmdb.host.UpdateMode
-	(*Host)(nil),                 // 1: infraboard.cmdb.host.Host
-	(*Describe)(nil),             // 2: infraboard.cmdb.host.Describe
-	(*QueryHostRequest)(nil),     // 3: infraboard.cmdb.host.QueryHostRequest
-	(*HostSet)(nil),              // 4: infraboard.cmdb.host.HostSet
-	(*UpdateHostRequest)(nil),    // 5: infraboard.cmdb.host.UpdateHostRequest
-	(*UpdateHostData)(nil),       // 6: infraboard.cmdb.host.UpdateHostData
-	(*DescribeHostRequest)(nil),  // 7: infraboard.cmdb.host.DescribeHostRequest
-	(*DeleteHostRequest)(nil),    // 8: infraboard.cmdb.host.DeleteHostRequest
-	(*resource.Base)(nil),        // 9: infraboard.cmdb.resource.Base
-	(*resource.Information)(nil), // 10: infraboard.cmdb.resource.Information
+	(UpdateMode)(0),              // 0: ericyaoxr.cmdb.host.UpdateMode
+	(*Host)(nil),                 // 1: ericyaoxr.cmdb.host.Host
+	(*Describe)(nil),             // 2: ericyaoxr.cmdb.host.Describe
+	(*QueryHostRequest)(nil),     // 3: ericyaoxr.cmdb.host.QueryHostRequest
+	(*HostSet)(nil),              // 4: ericyaoxr.cmdb.host.HostSet
+	(*UpdateHostRequest)(nil),    // 5: ericyaoxr.cmdb.host.UpdateHostRequest
+	(*UpdateHostData)(nil),       // 6: ericyaoxr.cmdb.host.UpdateHostData
+	(*DescribeHostRequest)(nil),  // 7: ericyaoxr.cmdb.host.DescribeHostRequest
+	(*DeleteHostRequest)(nil),    // 8: ericyaoxr.cmdb.host.DeleteHostRequest
+	(*resource.Base)(nil),        // 9: ericyaoxr.cmdb.resource.Base
+	(*resource.Information)(nil), // 10: ericyaoxr.cmdb.resource.Information
 }
 var file_app_host_pb_host_proto_depIdxs = []int32{
-	9,  // 0: infraboard.cmdb.host.Host.base:type_name -> infraboard.cmdb.resource.Base
-	10, // 1: infraboard.cmdb.host.Host.information:type_name -> infraboard.cmdb.resource.Information
-	2,  // 2: infraboard.cmdb.host.Host.describe:type_name -> infraboard.cmdb.host.Describe
-	1,  // 3: infraboard.cmdb.host.HostSet.items:type_name -> infraboard.cmdb.host.Host
-	0,  // 4: infraboard.cmdb.host.UpdateHostRequest.update_mode:type_name -> infraboard.cmdb.host.UpdateMode
-	6,  // 5: infraboard.cmdb.host.UpdateHostRequest.update_host_data:type_name -> infraboard.cmdb.host.UpdateHostData
-	10, // 6: infraboard.cmdb.host.UpdateHostData.information:type_name -> infraboard.cmdb.resource.Information
-	2,  // 7: infraboard.cmdb.host.UpdateHostData.describe:type_name -> infraboard.cmdb.host.Describe
-	1,  // 8: infraboard.cmdb.host.Service.SaveHost:input_type -> infraboard.cmdb.host.Host
-	3,  // 9: infraboard.cmdb.host.Service.QueryHost:input_type -> infraboard.cmdb.host.QueryHostRequest
-	5,  // 10: infraboard.cmdb.host.Service.UpdateHost:input_type -> infraboard.cmdb.host.UpdateHostRequest
-	7,  // 11: infraboard.cmdb.host.Service.DescribeHost:input_type -> infraboard.cmdb.host.DescribeHostRequest
-	8,  // 12: infraboard.cmdb.host.Service.DeleteHost:input_type -> infraboard.cmdb.host.DeleteHostRequest
-	1,  // 13: infraboard.cmdb.host.Service.SaveHost:output_type -> infraboard.cmdb.host.Host
-	4,  // 14: infraboard.cmdb.host.Service.QueryHost:output_type -> infraboard.cmdb.host.HostSet
-	1,  // 15: infraboard.cmdb.host.Service.UpdateHost:output_type -> infraboard.cmdb.host.Host
-	1,  // 16: infraboard.cmdb.host.Service.DescribeHost:output_type -> infraboard.cmdb.host.Host
-	1,  // 17: infraboard.cmdb.host.Service.DeleteHost:output_type -> infraboard.cmdb.host.Host
+	9,  // 0: ericyaoxr.cmdb.host.Host.base:type_name -> ericyaoxr.cmdb.resource.Base
+	10, // 1: ericyaoxr.cmdb.host.Host.information:type_name -> ericyaoxr.cmdb.resource.Information
+	2,  // 2: ericyaoxr.cmdb.host.Host.describe:type_name -> ericyaoxr.cmdb.host.Describe
+	1,  // 3: ericyaoxr.cmdb.host.HostSet.items:type_name -> ericyaoxr.cmdb.host.Host
+	0,  // 4: ericyaoxr.cmdb.host.UpdateHostRequest.update_mode:type_name -> ericyaoxr.cmdb.host.UpdateMode
+	6,  // 5: ericyaoxr.cmdb.host.UpdateHostRequest.update_host_data:type_name -> ericyaoxr.cmdb.host.UpdateHostData
+	10, // 6: ericyaoxr.cmdb.host.UpdateHostData.information:type_name -> ericyaoxr.cmdb.resource.Information
+	2,  // 7: ericyaoxr.cmdb.host.UpdateHostData.describe:type_name -> ericyaoxr.cmdb.host.Describe
+	1,  // 8: ericyaoxr.cmdb.host.Service.SaveHost:input_type -> ericyaoxr.cmdb.host.Host
+	3,  // 9: ericyaoxr.cmdb.host.Service.QueryHost:input_type -> ericyaoxr.cmdb.host.QueryHostRequest
+	5,  // 10: ericyaoxr.cmdb.host.Service.UpdateHost:input_type -> ericyaoxr.cmdb.host.UpdateHostRequest
+	7,  // 11: ericyaoxr.cmdb.host.Service.DescribeHost:input_type -> ericyaoxr.cmdb.host.DescribeHostRequest
+	8,  // 12: ericyaoxr.cmdb.host.Service.DeleteHost:input_type -> ericyaoxr.cmdb.host.DeleteHostRequest
+	1,  // 13: ericyaoxr.cmdb.host.Service.SaveHost:output_type -> ericyaoxr.cmdb.host.Host
+	4,  // 14: ericyaoxr.cmdb.host.Service.QueryHost:output_type -> ericyaoxr.cmdb.host.HostSet
+	1,  // 15: ericyaoxr.cmdb.host.Service.UpdateHost:output_type -> ericyaoxr.cmdb.host.Host
+	1,  // 16: ericyaoxr.cmdb.host.Service.DescribeHost:output_type -> ericyaoxr.cmdb.host.Host
+	1,  // 17: ericyaoxr.cmdb.host.Service.DeleteHost:output_type -> ericyaoxr.cmdb.host.Host
 	13, // [13:18] is the sub-list for method output_type
 	8,  // [8:13] is the sub-list for method input_type
 	8,  // [8:8] is the sub-list for extension type_name

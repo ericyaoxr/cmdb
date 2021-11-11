@@ -23,22 +23,22 @@ const (
 type Vendor int32
 
 const (
-	Vendor_NULL    Vendor = 0
-	Vendor_TENCENT Vendor = 1
-	// Vendor_ALIYUN  Vendor = 2
+	Vendor_NULL          Vendor = 0
+	Vendor_TENCENT_CLOUD Vendor = 1
+	Vendor_TENCENT       Vendor = 2
 )
 
 // Enum value maps for Vendor.
 var (
 	Vendor_name = map[int32]string{
 		0: "NULL",
-		1: "TENCENT",
-		// 2: "ALIYUN",
+		1: "TENCENT_CLOUD",
+		2: "TENCENT",
 	}
 	Vendor_value = map[string]int32{
-		"NULL":    0,
-		"TENCENT": 1,
-		// "ALIYUN":  2,
+		"NULL":          0,
+		"TENCENT_CLOUD": 1,
+		"TENCENT":       2,
 	}
 )
 

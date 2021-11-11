@@ -1,0 +1,91 @@
+syntax = "proto3";
+
+package ericyaoxr.cmdb.config;
+option go_package="github.com/ericyaoxr/cmdb/app/config";
+
+import "app/application/pb/application.proto";
+
+service Service {
+    rpc SaveConfig(Config) returns(Config) {}
+    rpc QueryConfig(QueryConfigRequest) returns(ConfigSet) {}
+    rpc UpdateConfig(UpdateConfigRequest) returns(Config) {}
+    rpc DescribeConfig(DescribeConfigRequest) returns(Config) {}
+    rpc DeleteConfig(DeleteConfigRequest) returns(Config) {}
+}
+
+enum UpdateMode {
+    PUT = 0;
+    PATCH = 1;
+}
+
+message Config {
+    ericyaoxr.cmdb.application.Application application = 1;
+    Describe describe = 2;
+}
+
+message Describe {
+    // 关联Resource
+	// @gotags: json:"id"
+    string id = 1;
+    // 关联Application
+	// @gotags: json:"application_id"
+    string application_id = 2;
+    // 配置的key名称
+	// @gotags: json:"name"
+    string name = 3;
+    // 主机地址
+	// @gotags: json:"host"
+    string host = 4;
+    // 端口
+	// @gotags: json:"port"
+    int32 port = 5;
+    // 环境
+	// @gotags: json:"env"
+    string env = 6;
+    // 配置类型
+	// @gotags: json:"type"
+    string type = 7;
+    // 来源
+	// @gotags: json:"source"
+    string source = 8;
+	// 创建时间
+	// @gotags: json:"create_at"
+    int64 create_at = 9;
+	// 创建时间
+	// @gotags: json:"update_at"
+    int64 update_at = 10;
+}
+
+message QueryConfigRequest {
+    uint64 page_size = 1;
+    uint64 page_number = 2;
+    string keywords = 3;
+}
+
+message ConfigSet {
+    repeated Config items = 1;
+    int64 total = 2;
+}
+
+message UpdateConfigRequest {
+    // @gotags: json:"id" validate:"required"
+    string id = 1;
+    // @gotags: json:"update_mode"
+    UpdateMode update_mode = 2;
+    // @gotags: json:"data" validate:"required"
+    UpdateConfigData update_config_data = 3;
+}
+
+message UpdateConfigData {
+    string id = 1;
+}
+
+message DescribeConfigRequest {
+    // @gotags: json:"id" validate:"required"
+    string id = 1;
+}
+
+message DeleteConfigRequest {
+    // @gotags: json:"id" validate:"required"
+    string id = 1;
+}

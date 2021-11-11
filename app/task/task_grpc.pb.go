@@ -32,7 +32,7 @@ func NewServiceClient(cc grpc.ClientConnInterface) ServiceClient {
 
 func (c *serviceClient) QueryTask(ctx context.Context, in *QueryTaskRequest, opts ...grpc.CallOption) (*TaskSet, error) {
 	out := new(TaskSet)
-	err := c.cc.Invoke(ctx, "/infraboard.cmdb.task.Service/QueryTask", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/ericyaoxr.cmdb.task.Service/QueryTask", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -41,7 +41,7 @@ func (c *serviceClient) QueryTask(ctx context.Context, in *QueryTaskRequest, opt
 
 func (c *serviceClient) CreatTask(ctx context.Context, in *CreateTaskRequst, opts ...grpc.CallOption) (*Task, error) {
 	out := new(Task)
-	err := c.cc.Invoke(ctx, "/infraboard.cmdb.task.Service/CreatTask", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/ericyaoxr.cmdb.task.Service/CreatTask", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -90,7 +90,7 @@ func _Service_QueryTask_Handler(srv interface{}, ctx context.Context, dec func(i
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/infraboard.cmdb.task.Service/QueryTask",
+		FullMethod: "/ericyaoxr.cmdb.task.Service/QueryTask",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ServiceServer).QueryTask(ctx, req.(*QueryTaskRequest))
@@ -108,7 +108,7 @@ func _Service_CreatTask_Handler(srv interface{}, ctx context.Context, dec func(i
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/infraboard.cmdb.task.Service/CreatTask",
+		FullMethod: "/ericyaoxr.cmdb.task.Service/CreatTask",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ServiceServer).CreatTask(ctx, req.(*CreateTaskRequst))
@@ -120,7 +120,7 @@ func _Service_CreatTask_Handler(srv interface{}, ctx context.Context, dec func(i
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Service_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "infraboard.cmdb.task.Service",
+	ServiceName: "ericyaoxr.cmdb.task.Service",
 	HandlerType: (*ServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

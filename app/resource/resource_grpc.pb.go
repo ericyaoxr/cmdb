@@ -31,7 +31,7 @@ func NewServiceClient(cc grpc.ClientConnInterface) ServiceClient {
 
 func (c *serviceClient) Search(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*ResourceSet, error) {
 	out := new(ResourceSet)
-	err := c.cc.Invoke(ctx, "/infraboard.cmdb.resource.Service/Search", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/ericyaoxr.cmdb.resource.Service/Search", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ func _Service_Search_Handler(srv interface{}, ctx context.Context, dec func(inte
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/infraboard.cmdb.resource.Service/Search",
+		FullMethod: "/ericyaoxr.cmdb.resource.Service/Search",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ServiceServer).Search(ctx, req.(*SearchRequest))
@@ -88,7 +88,7 @@ func _Service_Search_Handler(srv interface{}, ctx context.Context, dec func(inte
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Service_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "infraboard.cmdb.resource.Service",
+	ServiceName: "ericyaoxr.cmdb.resource.Service",
 	HandlerType: (*ServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
