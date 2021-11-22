@@ -8,7 +8,7 @@ import (
 	"github.com/ericyaoxr/cmdb/app/application"
 )
 
-func (s *service) save(ctx context.Context, app *application.Application) error {
+func (s *service) save(ctx context.Context, ins *application.Application) error {
 	var (
 		stmt *sql.Stmt
 		err  error
@@ -36,7 +36,7 @@ func (s *service) save(ctx context.Context, app *application.Application) error 
 		return err
 	}
 	defer stmt.Close()
-
+	app := ins.Base
 	_, err = stmt.Exec(
 		&app.Id, &app.Name, &app.Repo, &app.Branch, &app.Module, &app.Topic, &app.Job,
 		&app.Description, &app.CreateAt, &app.UpdateAt, &app.Status,

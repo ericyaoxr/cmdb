@@ -73,7 +73,7 @@ func (s *service) QueryConfig(ctx context.Context, req *config.QueryConfigReques
 	set := config.NewConfigSet()
 	for rows.Next() {
 		ins := config.NewDefaultConfig()
-		app := ins.Application
+		app := ins.Base
 		desc := ins.Describe
 		err := rows.Scan(
 			&desc.Id, &desc.ApplicationId, &desc.Name, &desc.Host, &desc.Port, &desc.Env, &desc.Type, &desc.Source, &desc.CreateAt, &desc.UpdateAt,
@@ -173,7 +173,7 @@ func (s *service) DescribeConfig(ctx context.Context, req *config.DescribeConfig
 	defer queryStmt.Close()
 
 	conf := config.NewDefaultConfig()
-	app := conf.Application
+	app := conf.Base
 	desc := conf.Describe
 	err = queryStmt.QueryRow(args...).Scan(
 		&desc.Id, &desc.ApplicationId, &desc.Name, &desc.Host, &desc.Port, &desc.Env, &desc.Type, &desc.Source, &desc.CreateAt, &desc.UpdateAt,

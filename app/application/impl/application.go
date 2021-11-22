@@ -31,9 +31,9 @@ const (
 
 func (s *service) SaveApplication(ctx context.Context, h *application.Application) (
 	*application.Application, error) {
-	h.Id = xid.New().String()
-	h.CreateAt = ftime.Now().Timestamp()
-	h.UpdateAt = ftime.Now().Timestamp()
+	h.Base.Id = xid.New().String()
+	h.Base.CreateAt = ftime.Now().Timestamp()
+	h.Base.UpdateAt = ftime.Now().Timestamp()
 
 	if err := s.save(ctx, h); err != nil {
 		return nil, err
@@ -74,7 +74,8 @@ func (s *service) QueryApplication(ctx context.Context, req *application.QueryAp
 
 	set := application.NewApplicationSet()
 	for rows.Next() {
-		app := application.NewDefaultApplication()
+		ins := application.NewDefaultApplication()
+		app := ins.Base
 		err := rows.Scan(
 			&app.Id, &app.Name, &app.Repo, &app.Branch, &app.Module, &app.Topic, &app.Job,
 			&app.Description, &app.CreateAt, &app.UpdateAt, &app.Status,
@@ -82,7 +83,7 @@ func (s *service) QueryApplication(ctx context.Context, req *application.QueryAp
 		if err != nil {
 			return nil, exception.NewInternalServerError("query application error, %s", err.Error())
 		}
-		set.Add(app)
+		set.Add(ins)
 	}
 
 	// 获取total SELECT COUNT(*) FROMT t Where ....
@@ -119,16 +120,16 @@ func (s *service) UpdateApplication(ctx context.Context, req *application.Update
 	}
 
 	// 查询出该条应用的数据
-	app, err := s.DescribeApplication(ctx, application.NewDescribeApplicationRequestWithID(req.Id))
+	ins, err := s.DescribeApplication(ctx, application.NewDescribeApplicationRequestWithID(req.Id))
 	if err != nil {
 		return nil, err
 	}
 
 	switch req.UpdateMode {
 	case application.UpdateMode_PATCH:
-		app.Patch(req.UpdateApplicationData)
+		ins.Patch(req.UpdateApplicationData)
 	default:
-		app.Put(req.UpdateApplicationData)
+		ins.Put(req.UpdateApplicationData)
 	}
 
 	defer func() {
@@ -144,7 +145,7 @@ func (s *service) UpdateApplication(ctx context.Context, req *application.Update
 		return nil, err
 	}
 	defer stmt.Close()
-
+	app := ins.Base
 	_, err = stmt.Exec(
 		app.Id, app.Name, app.Repo, app.Branch, app.Module, app.Topic,
 		app.Job, app.Description, app.CreateAt, app.UpdateAt, app.Status,
@@ -157,7 +158,7 @@ func (s *service) UpdateApplication(ctx context.Context, req *application.Update
 		return nil, err
 	}
 
-	return app, nil
+	return ins, nil
 }
 
 func (s *service) DescribeApplication(ctx context.Context, req *application.DescribeApplicationRequest) (
@@ -172,7 +173,8 @@ func (s *service) DescribeApplication(ctx context.Context, req *application.Desc
 	}
 	defer queryStmt.Close()
 
-	app := application.NewDefaultApplication()
+	ins := application.NewDefaultApplication()
+	app := ins.Base
 	err = queryStmt.QueryRow(args...).Scan(
 		&app.Id, &app.Name, &app.Repo, &app.Branch, &app.Module, &app.Topic,
 		&app.Job, &app.Description, &app.CreateAt, &app.UpdateAt, &app.Status,
@@ -185,7 +187,7 @@ func (s *service) DescribeApplication(ctx context.Context, req *application.Desc
 		return nil, exception.NewInternalServerError("describe application error, %s", err.Error())
 	}
 
-	return app, nil
+	return ins, nil
 }
 
 func (s *service) DeleteApplication(ctx context.Context, req *application.DeleteApplicationRequest) (

@@ -10,8 +10,8 @@ import (
 
 func NewDefaultConfig() *Config {
 	return &Config{
-		Application: &application.Application{},
-		Describe:    &Describe{},
+		Base:     &application.Base{},
+		Describe: &Describe{},
 	}
 }
 

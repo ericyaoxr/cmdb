@@ -17,6 +17,10 @@ enum UpdateMode {
 }
 
 message Application {
+    Base base = 1;
+}
+
+message Base {
 	// ApplicationID
 	// @gotags: json:"id"
     string id = 1;
@@ -73,7 +77,7 @@ message UpdateApplicationRequest {
 }
 
 message UpdateApplicationData {
-    Application application = 1;
+    Base base = 1;
 }
 
 message DescribeApplicationRequest {

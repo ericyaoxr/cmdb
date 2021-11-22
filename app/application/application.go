@@ -10,26 +10,29 @@ import (
 
 func NewDefaultApplication() *Application {
 	return &Application{
-		// Status: "已上线",
+		Base: &Base{
+			Status: "已上线",
+		},
 	}
 }
 
 func (h *Application) Put(req *UpdateApplicationData) {
-	h.UpdateAt = ftime.Now().Timestamp()
+	h.Base = req.Base
+	h.Base.UpdateAt = ftime.Now().Timestamp()
 }
 
 func (h *Application) Patch(req *UpdateApplicationData) error {
-	err := ObjectPatch(h, req)
+	err := ObjectPatch(h.Base, req.Base)
 	if err != nil {
 		return err
 	}
 
-	err = ObjectPatch(h, req)
+	err = ObjectPatch(h.Base, req.Base)
 	if err != nil {
 		return err
 	}
 
-	h.UpdateAt = ftime.Now().Timestamp()
+	h.Base.UpdateAt = ftime.Now().Timestamp()
 	return nil
 }
 
@@ -44,20 +47,12 @@ func ObjectPatch(old, new interface{}) error {
 func (h *Application) GenHash() error {
 	hash := sha1.New()
 
-	b, err := json.Marshal(h)
+	b, err := json.Marshal(h.Base)
 	if err != nil {
 		return err
 	}
 	hash.Write(b)
-	h.Id = fmt.Sprintf("%x", hash.Sum(nil))
-
-	b, err = json.Marshal(h)
-	if err != nil {
-		return err
-	}
-	hash.Reset()
-	hash.Write(b)
-	h.Id = fmt.Sprintf("%x", hash.Sum(nil))
+	h.Base.Id = fmt.Sprintf("%x", hash.Sum(nil))
 	return nil
 }
 

@@ -19,7 +19,7 @@ enum UpdateMode {
 }
 
 message Config {
-    ericyaoxr.cmdb.application.Application application = 1;
+    ericyaoxr.cmdb.application.Base base = 1;
     Describe describe = 2;
 }
 
