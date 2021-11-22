@@ -21,8 +21,7 @@ const (
 		id=?,application_id=?,name=?,host=?,port=?,env=?,type=?,source=?,create_at=?,update_at=?
 	WHERE id = ?`
 
-	queryConfigSQL = `SELECT c.id,c.application_id,c.name,c.host,c.port,c.env,c.type,c.source,c.create_at,c.update_at FROM config as c `
-	// queryConfigSQL = `SELECT c.id,c.application_id,c.name,c.host,c.port,c.env,c.type,c.source,c.create_at,c.update_at FROM config as c LEFT JOIN application as a ON c.application_id=a.id`
+	queryConfigSQL  = `SELECT c.id,c.application_id,c.name,c.host,c.port,c.env,c.type,c.source,c.create_at,c.update_at,a.name,a.repo, a.branch, a.module,a.topic, a.job, a.description, a.status FROM config as c LEFT JOIN application as a ON c.application_id=a.id`
 	deleteConfigSQL = `DELETE FROM config as c WHERE c.id = ?;`
 )
 
@@ -40,73 +39,19 @@ func (s *service) SaveConfig(ctx context.Context, conf *config.Config) (
 	return conf, nil
 }
 
-// func (s *service) QueryConfig(ctx context.Context, req *config.QueryConfigRequest) (*config.ConfigSet, error) {
-// 	query := sqlbuilder.NewQuery(queryConfigSQL)
-
-// 	if req.Keywords != "" {
-// 		query.Where("c.name LIKE ? OR c.id = ? OR c.env = ? OR c.type LIKE ? OR c.host LIKE ?",
-// 			"%"+req.Keywords+"%",
-// 			req.Keywords,
-// 			req.Keywords,
-// 			req.Keywords,
-// 			req.Keywords+"%",
-// 		)
-// 	}
-
-// 	querySQL, args := query.Order("c.create_at").Desc().Limit(req.OffSet(), uint(req.PageSize)).BuildQuery()
-// 	s.log.Debugf("sql: %s", querySQL)
-
-// 	queryStmt, err := s.db.Prepare(querySQL)
-// 	if err != nil {
-// 		return nil, exception.NewInternalServerError("prepare query config error, %s", err.Error())
-// 	}
-// 	defer queryStmt.Close()
-
-// 	rows, err := queryStmt.Query(args...)
-// 	if err != nil {
-// 		return nil, exception.NewInternalServerError(err.Error())
-// 	}
-// 	defer rows.Close()
-
-// 	set := config.NewConfigSet()
-// 	for rows.Next() {
-// 		conf := config.NewDefaultConfig()
-// 		app := conf.Application
-// 		desc := conf
-// 		err := rows.Scan(
-// 			&desc.Id, &desc.ApplicationId, &desc.Name, &desc.Host, &desc.Port, &desc.Env, &desc.Type, &desc.Source, &desc.CreateAt, &desc.UpdateAt,
-// 			&app.Id, &app.Name, &app.Repo, &app.Branch, &app.Module, &app.Topic, &app.Job, &app.Description, &app.Status, &app.CreateAt, &app.UpdateAt,
-// 		)
-// 		if err != nil {
-// 			return nil, exception.NewInternalServerError("query config error, %s", err.Error())
-// 		}
-// 		set.Add(conf)
-// 	}
-
-// 	// 获取total SELECT COUNT(*) FROMT t Where ....
-// 	countSQL, args := query.BuildCount()
-// 	countStmt, err := s.db.Prepare(countSQL)
-// 	if err != nil {
-// 		return nil, exception.NewInternalServerError(err.Error())
-// 	}
-
-// 	defer countStmt.Close()
-// 	err = countStmt.QueryRow(args...).Scan(&set.Total)
-// 	if err != nil {
-// 		return nil, exception.NewInternalServerError(err.Error())
-// 	}
-
-// 	return set, nil
-// }
-
 func (s *service) QueryConfig(ctx context.Context, req *config.QueryConfigRequest) (
 	*config.ConfigSet, error) {
 	query := sqlbuilder.NewQuery(queryConfigSQL)
 
 	if req.Keywords != "" {
-		query.Where("name LIKE ? OR env = ?",
+		query.Where("c.name LIKE ? OR c.id = ? OR c.env = ? OR c.type LIKE ? OR c.host LIKE ? OR a.name LIKE ? OR a.topic LIKE ?",
 			"%"+req.Keywords+"%",
 			req.Keywords,
+			req.Keywords,
+			req.Keywords,
+			req.Keywords+"%",
+			"%"+req.Keywords+"%",
+			"%"+req.Keywords+"%",
 		)
 	}
 
@@ -128,10 +73,11 @@ func (s *service) QueryConfig(ctx context.Context, req *config.QueryConfigReques
 	set := config.NewConfigSet()
 	for rows.Next() {
 		ins := config.NewDefaultConfig()
-		// app := ins.Application
+		app := ins.Application
 		desc := ins.Describe
 		err := rows.Scan(
 			&desc.Id, &desc.ApplicationId, &desc.Name, &desc.Host, &desc.Port, &desc.Env, &desc.Type, &desc.Source, &desc.CreateAt, &desc.UpdateAt,
+			&app.Name, &app.Repo, &app.Branch, &app.Module, &app.Topic, &app.Job, &app.Description, &app.Status,
 		)
 		if err != nil {
 			return nil, exception.NewInternalServerError("query host error, %s", err.Error())
@@ -227,11 +173,11 @@ func (s *service) DescribeConfig(ctx context.Context, req *config.DescribeConfig
 	defer queryStmt.Close()
 
 	conf := config.NewDefaultConfig()
-	// app := conf.Application
+	app := conf.Application
 	desc := conf.Describe
 	err = queryStmt.QueryRow(args...).Scan(
 		&desc.Id, &desc.ApplicationId, &desc.Name, &desc.Host, &desc.Port, &desc.Env, &desc.Type, &desc.Source, &desc.CreateAt, &desc.UpdateAt,
-		// &app.Name, &app.Repo, &app.Branch, &app.Module, &app.Topic, &app.Job, &app.Description, &app.Status,
+		&app.Name, &app.Repo, &app.Branch, &app.Module, &app.Topic, &app.Job, &app.Description, &app.Status,
 	)
 
 	if err != nil {

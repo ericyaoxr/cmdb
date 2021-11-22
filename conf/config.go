@@ -48,9 +48,9 @@ func (a *app) GRPCAddr() string {
 func newDefaultAPP() *app {
 	return &app{
 		Name:       "cmdb",
-		HttpHost:   "127.0.0.1",
+		HttpHost:   "0.0.0.0",
 		HttpPort:   "8050",
-		GRPCHost:   "127.0.0.1",
+		GRPCHost:   "0.0.0.0",
 		GRPCPort:   "18050",
 		EncryptKey: "defualt app encrypt key",
 	}
@@ -127,7 +127,7 @@ func (m *mySQL) getDBConn() (*sql.DB, error) {
 // newDefaultMySQL todo
 func newDefaultMySQL() *mySQL {
 	return &mySQL{
-		Database:    "go_course",
+		Database:    "cmdb",
 		Host:        "127.0.0.1",
 		Port:        "3306",
 		MaxOpenConn: 200,

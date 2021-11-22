@@ -4,12 +4,14 @@ import (
 	"crypto/sha1"
 	"encoding/json"
 
+	"github.com/ericyaoxr/cmdb/app/application"
 	"github.com/ericyaoxr/mcube/types/ftime"
 )
 
 func NewDefaultConfig() *Config {
 	return &Config{
-		// Describe: &Describe{},
+		Application: &application.Application{},
+		Describe:    &Describe{},
 	}
 }
 

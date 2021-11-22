@@ -10,13 +10,12 @@ import (
 
 func NewDefaultApplication() *Application {
 	return &Application{
-		Status: "已上线",
+		// Status: "已上线",
 	}
 }
 
 func (h *Application) Put(req *UpdateApplicationData) {
 	h.UpdateAt = ftime.Now().Timestamp()
-	h.GenHash()
 }
 
 func (h *Application) Patch(req *UpdateApplicationData) error {
@@ -31,7 +30,6 @@ func (h *Application) Patch(req *UpdateApplicationData) error {
 	}
 
 	h.UpdateAt = ftime.Now().Timestamp()
-	h.GenHash()
 	return nil
 }
 

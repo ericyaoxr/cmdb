@@ -79,8 +79,7 @@ message UpdateConfigRequest {
 }
 
 message UpdateConfigData {
-    // @gotags: json:"id" validate:"required"
-    string id = 1;
+    Describe describe = 1;
 }
 
 message DescribeConfigRequest {

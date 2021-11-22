@@ -104,8 +104,8 @@ func (s *service) QueryApplication(ctx context.Context, req *application.QueryAp
 func (s *service) UpdateApplication(ctx context.Context, req *application.UpdateApplicationRequest) (
 	*application.Application, error) {
 	var (
-		// stmt *sql.Stmt
-		err error
+		stmt *sql.Stmt
+		err  error
 	)
 
 	// 检测参数合法性
@@ -118,17 +118,17 @@ func (s *service) UpdateApplication(ctx context.Context, req *application.Update
 		return nil, fmt.Errorf("start tx error, %s", err)
 	}
 
-	// 查询出该条实例的数据
-	ins, err := s.DescribeApplication(ctx, application.NewDescribeApplicationRequestWithID(req.Id))
+	// 查询出该条应用的数据
+	app, err := s.DescribeApplication(ctx, application.NewDescribeApplicationRequestWithID(req.Id))
 	if err != nil {
 		return nil, err
 	}
 
 	switch req.UpdateMode {
 	case application.UpdateMode_PATCH:
-		ins.Patch(req.UpdateApplicationData)
+		app.Patch(req.UpdateApplicationData)
 	default:
-		ins.Put(req.UpdateApplicationData)
+		app.Put(req.UpdateApplicationData)
 	}
 
 	defer func() {
@@ -138,11 +138,26 @@ func (s *service) UpdateApplication(ctx context.Context, req *application.Update
 		}
 	}()
 
+	// 避免SQL注入, 请使用Prepare
+	stmt, err = tx.Prepare(updateApplicationSQL)
+	if err != nil {
+		return nil, err
+	}
+	defer stmt.Close()
+
+	_, err = stmt.Exec(
+		app.Id, app.Name, app.Repo, app.Branch, app.Module, app.Topic,
+		app.Job, app.Description, app.CreateAt, app.UpdateAt, app.Status,
+	)
+	if err != nil {
+		return nil, err
+	}
+
 	if err := tx.Commit(); err != nil {
 		return nil, err
 	}
 
-	return ins, nil
+	return app, nil
 }
 
 func (s *service) DescribeApplication(ctx context.Context, req *application.DescribeApplicationRequest) (

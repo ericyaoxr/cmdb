@@ -73,8 +73,7 @@ message UpdateApplicationRequest {
 }
 
 message UpdateApplicationData {
-    // @gotags: json:"id" validate:"required"
-    string id = 1;
+    Application application = 1;
 }
 
 message DescribeApplicationRequest {

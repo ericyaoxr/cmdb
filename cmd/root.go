@@ -19,9 +19,9 @@ var vers bool
 
 // RootCmd represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
-	Use:   "cmdb-api",
-	Short: "cmdb-api 管理系统",
-	Long:  `cmdb-api ...`,
+	Use:   "cmdb",
+	Short: "cmdb 管理系统",
+	Long:  `cmdb ...`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		// if vers {
 		// 	fmt.Println(version.FullVersion())

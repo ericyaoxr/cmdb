@@ -32,7 +32,7 @@ linux: dep ## Build the binary file
 	@GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -o dist/cmdb-api $(MAIN_FILE)
 
 run: # Run Develop server
-	@go run $(MAIN_FILE) start -f etc/cmdb-api.toml
+	@go run $(MAIN_FILE) start -f etc/cmdb.toml
 
 clean: ## Remove previous build
 	@rm -f dist/*
