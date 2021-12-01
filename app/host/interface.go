@@ -7,10 +7,6 @@ import (
 	"github.com/go-playground/validator/v10"
 )
 
-const (
-	AppName = "Host"
-)
-
 // use a single instance of Validate, it caches struct info
 var (
 	validate = validator.New()
@@ -45,7 +41,8 @@ func (req *QueryHostRequest) OffSet() int64 {
 
 func NewDescribeHostRequestWithID(id string) *DescribeHostRequest {
 	return &DescribeHostRequest{
-		Id: id,
+		DescribeBy: DescribeBy_HOST_ID,
+		Value:      id,
 	}
 }
 

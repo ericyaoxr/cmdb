@@ -14,8 +14,6 @@ import (
 	cvmOp "github.com/ericyaoxr/cmdb/provider/txyun/cvm"
 )
 
-type SyncTaskCallback func(*task.Task)
-
 func (s *service) syncHost(ctx context.Context, secret *secret.Secret, t *task.Task, cb SyncTaskCallback) {
 	var (
 		pager host.Pager
@@ -34,10 +32,9 @@ func (s *service) syncHost(ctx context.Context, secret *secret.Secret, t *task.T
 		s.log.Warnf("decrypt api secret error, %s", err)
 	}
 
-	hs := host.NewHostSet()
 	switch secret.Vendor {
 	case resource.Vendor_TENCENT:
-		s.log.Debugf("sync txyun host ...")
+		s.log.Debugf("sync txyun cvm ...")
 		client := txConn.NewTencentCloudClient(secret.ApiKey, secret.ApiSecret, t.Region)
 		operater := cvmOp.NewCVMOperater(client.CvmClient())
 		pager = operater.PageQuery()
@@ -72,19 +69,16 @@ func (s *service) syncHost(ctx context.Context, secret *secret.Secret, t *task.T
 
 			// 调用host服务保持数据
 			for i := range p.Data.Items {
-				hs.Add(p.Data.Items[i])
+				target := p.Data.Items[i]
+				h, err := s.host.SaveHost(ctx, target)
+				if err != nil {
+					s.log.Warnf("save host error, %s", err)
+					t.AddDetailFailed(target.Information.Name, err.Error())
+				} else {
+					s.log.Debugf("save host %s to db", h.ShortDesc())
+					t.AddDetailSucceed(target.Information.Name, "")
+				}
 			}
-		}
-	}
-
-	// 调用host服务保持数据
-	for i := range hs.Items {
-		target := hs.Items[i]
-		_, err := s.host.SaveHost(ctx, target)
-		if err != nil {
-			t.AddDetailFailed(target.Information.Name, err.Error())
-		} else {
-			t.AddDetailSucceed(target.Information.Name, "")
 		}
 	}
 }

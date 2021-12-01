@@ -147,8 +147,9 @@ func (s *service) UpdateApplication(ctx context.Context, req *application.Update
 	defer stmt.Close()
 	app := ins.Base
 	_, err = stmt.Exec(
-		app.Id, app.Name, app.Repo, app.Branch, app.Module, app.Topic,
+		app.Name, app.Repo, app.Branch, app.Module, app.Topic,
 		app.Job, app.Description, app.CreateAt, app.UpdateAt, app.Status,
+		app.Id,
 	)
 	if err != nil {
 		return nil, err

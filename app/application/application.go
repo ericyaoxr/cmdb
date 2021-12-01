@@ -10,9 +10,7 @@ import (
 
 func NewDefaultApplication() *Application {
 	return &Application{
-		Base: &Base{
-			Status: "已上线",
-		},
+		Base: &Base{},
 	}
 }
 
@@ -26,12 +24,6 @@ func (h *Application) Patch(req *UpdateApplicationData) error {
 	if err != nil {
 		return err
 	}
-
-	err = ObjectPatch(h.Base, req.Base)
-	if err != nil {
-		return err
-	}
-
 	h.Base.UpdateAt = ftime.Now().Timestamp()
 	return nil
 }

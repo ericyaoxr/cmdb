@@ -36,6 +36,6 @@ func init() {
 		panic("empty TX_CLOUD_SECRET_KEY")
 	}
 
-	client := connectivity.NewTencentCloudClient(secretID, secretKey, regions.Shanghai)
+	client := connectivity.NewTencentCloudClient(secretID, secretKey, regions.Guangzhou)
 	operater = op.NewCVMOperater(client.CvmClient())
 }

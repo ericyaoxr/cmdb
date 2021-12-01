@@ -26,8 +26,9 @@ func (h *handler) ListResourceType(w http.ResponseWriter, r *http.Request) {
 		// 	{Name: "关系型数据库", Value: resource.RdsResource.String(), Describe: "阿里云RDS"},
 		// },
 		resource.Vendor_TENCENT.String(): {
-			{Name: "主机", Value: resource.Type_HOST.String(), Describe: "腾讯云CVM"},
-			{Name: "关系型数据库", Value: resource.Type_RDS.String(), Describe: "腾讯云CDB"},
+			{Name: "主机", Value: resource.Type_HOST.String(), Describe: "CVM", Meta: utils.SkipRegion(false)},
+			{Name: "关系型数据库", Value: resource.Type_RDS.String(), Describe: "CDB", Meta: utils.SkipRegion(false)},
+			{Name: "月账单", Value: resource.Type_BILL.String(), Describe: "月账单", Meta: utils.SkipRegion(true)},
 		},
 	}
 	response.Success(w, resp)

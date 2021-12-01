@@ -27,3 +27,5 @@ cmdb.env
 
 # sql文件
 *.sql
+
+README.md

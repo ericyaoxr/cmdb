@@ -7,6 +7,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/ericyaoxr/mcube/logger/zap"
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -49,9 +50,9 @@ func newDefaultAPP() *app {
 	return &app{
 		Name:       "cmdb",
 		HttpHost:   "0.0.0.0",
-		HttpPort:   "8050",
+		HttpPort:   "8060",
 		GRPCHost:   "0.0.0.0",
-		GRPCPort:   "18050",
+		GRPCPort:   "18060",
 		EncryptKey: "defualt app encrypt key",
 	}
 }
@@ -106,6 +107,7 @@ func (m *mySQL) GetDB() (*sql.DB, error) {
 }
 
 func (m *mySQL) getDBConn() (*sql.DB, error) {
+	zap.L().Infof("connect to mysql: %s:%s", m.Host, m.Port)
 	var err error
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&multiStatements=true", m.UserName, m.Password, m.Host, m.Port, m.Database)
 	db, err := sql.Open("mysql", dsn)
@@ -127,12 +129,16 @@ func (m *mySQL) getDBConn() (*sql.DB, error) {
 // newDefaultMySQL todo
 func newDefaultMySQL() *mySQL {
 	return &mySQL{
-		Database:    "cmdb",
-		Host:        "127.0.0.1",
-		Port:        "3306",
-		MaxOpenConn: 200,
-		MaxIdleConn: 50,
-		MaxLifeTime: 1800,
-		MaxIdleTime: 600,
+		Database: "cmdb",
+		Host:     "127.0.0.1",
+		Port:     "3306",
+		// MaxOpenConn: 200,
+		// MaxIdleConn: 50,
+		// MaxLifeTime: 1800,
+		// MaxIdleTime: 600,
+		MaxOpenConn: 600,
+		MaxIdleConn: 200,
+		MaxLifeTime: 3600,
+		MaxIdleTime: 1200,
 	}
 }

@@ -2,6 +2,7 @@ package impl
 
 import (
 	"context"
+	"time"
 
 	"github.com/ericyaoxr/cmdb/app/resource"
 	"github.com/ericyaoxr/cmdb/app/secret"
@@ -9,6 +10,9 @@ import (
 	"github.com/ericyaoxr/mcube/exception"
 	"github.com/ericyaoxr/mcube/sqlbuilder"
 )
+
+// 任务回调
+type SyncTaskCallback func(*task.Task)
 
 // 通过回调更新任务状态
 func (s *service) SyncTaskCallback(t *task.Task) {
@@ -40,9 +44,12 @@ func (s *service) CreatTask(ctx context.Context, req *task.CreateTaskRequst) (
 	}
 
 	// 资源同步
+	syncCtx, _ := context.WithTimeout(context.Background(), time.Minute*30)
 	switch req.ResourceType {
 	case resource.Type_HOST:
-		go s.syncHost(ctx, secret, t, s.SyncTaskCallback)
+		go s.syncHost(syncCtx, secret, t, s.SyncTaskCallback)
+	case resource.Type_BILL:
+		go s.syncBill(syncCtx, secret, t, s.SyncTaskCallback)
 	}
 
 	// 记录任务

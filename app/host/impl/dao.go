@@ -86,6 +86,7 @@ func (s *service) delete(ctx context.Context, req *host.DeleteHostRequest) error
 	// 关于事物级别可以参考文章: https://zhuanlan.zhihu.com/p/117476959
 	tx, err := s.db.BeginTx(ctx, nil)
 	if err != nil {
+		fmt.Printf("start tx error, %s", err)
 		return err
 	}
 

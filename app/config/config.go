@@ -16,18 +16,16 @@ func NewDefaultConfig() *Config {
 }
 
 func (h *Config) Put(req *UpdateConfigData) {
+	h.Describe = req.Describe
 	h.Describe.UpdateAt = ftime.Now().Timestamp()
-	h.GenHash()
 }
 
 func (h *Config) Patch(req *UpdateConfigData) error {
-	err := ObjectPatch(h, req)
+	err := ObjectPatch(h.Describe, req.Describe)
 	if err != nil {
 		return err
 	}
-
 	h.Describe.UpdateAt = ftime.Now().Timestamp()
-	h.GenHash()
 	return nil
 }
 

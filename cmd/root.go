@@ -6,6 +6,8 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
+
+	"github.com/ericyaoxr/cmdb/version"
 )
 
 var (
@@ -23,10 +25,10 @@ var RootCmd = &cobra.Command{
 	Short: "cmdb 管理系统",
 	Long:  `cmdb ...`,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		// if vers {
-		// 	fmt.Println(version.FullVersion())
-		// 	return nil
-		// }
+		if vers {
+			fmt.Println(version.FullVersion())
+			return nil
+		}
 		return errors.New("no flags find")
 	},
 }

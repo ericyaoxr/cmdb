@@ -81,16 +81,5 @@ func (s *service) delete(ctx context.Context, req *config.DeleteConfigRequest) e
 		return err
 	}
 
-	stmt, err = s.db.Prepare(deleteConfigSQL)
-	if err != nil {
-		return err
-	}
-	defer stmt.Close()
-
-	_, err = stmt.Exec(req.Id)
-	if err != nil {
-		return err
-	}
-
 	return tx.Commit()
 }

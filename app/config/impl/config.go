@@ -18,11 +18,11 @@ const (
 		id,application_id,name,host,port,env,type,source,create_at,update_at
 	) VALUES (?,?,?,?,?,?,?,?,?,?);`
 	updateConfigSQL = `UPDATE config SET 
-		id=?,application_id=?,name=?,host=?,port=?,env=?,type=?,source=?,create_at=?,update_at=?
+		application_id=?,name=?,host=?,port=?,env=?,type=?,source=?,create_at=?,update_at=?
 	WHERE id = ?`
 
 	queryConfigSQL  = `SELECT c.id,c.application_id,c.name,c.host,c.port,c.env,c.type,c.source,c.create_at,c.update_at,a.name,a.repo, a.branch, a.module,a.topic, a.job, a.description, a.status FROM config as c LEFT JOIN application as a ON c.application_id=a.id`
-	deleteConfigSQL = `DELETE FROM config as c WHERE c.id = ?;`
+	deleteConfigSQL = `DELETE FROM config WHERE id = ?;`
 )
 
 func (s *service) SaveConfig(ctx context.Context, conf *config.Config) (
@@ -147,7 +147,8 @@ func (s *service) UpdateConfig(ctx context.Context, req *config.UpdateConfigRequ
 
 	desc := conf.Describe
 	_, err = stmt.Exec(
-		desc.Id, desc.ApplicationId, desc.Name, desc.Host, desc.Port, desc.Env, desc.Type, desc.Source, desc.CreateAt, desc.UpdateAt,
+		desc.ApplicationId, desc.Name, desc.Host, desc.Port, desc.Env, desc.Type, desc.Source, desc.CreateAt, desc.UpdateAt,
+		desc.Id,
 	)
 	if err != nil {
 		return nil, err
