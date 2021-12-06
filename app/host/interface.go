@@ -35,6 +35,13 @@ func NewQueryHostRequestFromHTTP(r *http.Request) *QueryHostRequest {
 	}
 }
 
+func NewQueryHostRequest() *QueryHostRequest {
+	return &QueryHostRequest{
+		PageSize:   20,
+		PageNumber: 1,
+	}
+}
+
 func (req *QueryHostRequest) OffSet() int64 {
 	return int64(req.PageSize) * int64(req.PageNumber-1)
 }

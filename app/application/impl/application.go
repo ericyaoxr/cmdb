@@ -17,12 +17,12 @@ const (
 	insertApplicationSQL = `INSERT INTO application (
 		id,name,repo,branch,module,topic,job,
 		description,create_at,update_at,
-		status
-	) VALUES (?,?,?,?,?,?,?,?,?,?,?);`
+		status,project_id
+	) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);`
 	updateApplicationSQL = `UPDATE application SET 
 	name=?,repo=?,branch=?,module=?,topic=?,
 	job=?,description=?,create_at=?,update_at=?,
-	status=?
+	status=?,project_id=?
 	WHERE id = ?`
 
 	queryApplicationSQL  = `SELECT * FROM application as a`
@@ -47,7 +47,8 @@ func (s *service) QueryApplication(ctx context.Context, req *application.QueryAp
 	query := sqlbuilder.NewQuery(queryApplicationSQL)
 
 	if req.Keywords != "" {
-		query.Where("name LIKE ? OR Repo = ? OR Branch = ? OR Module LIKE ? OR Topic LIKE ? OR Job LIKE ?",
+		query.Where("id = ? OR name LIKE ? OR Repo = ? OR Branch = ? OR Module LIKE ? OR Topic LIKE ? OR Job LIKE ?",
+			req.Keywords,
 			"%"+req.Keywords+"%",
 			req.Keywords,
 			req.Keywords,
@@ -78,7 +79,7 @@ func (s *service) QueryApplication(ctx context.Context, req *application.QueryAp
 		app := ins.Base
 		err := rows.Scan(
 			&app.Id, &app.Name, &app.Repo, &app.Branch, &app.Module, &app.Topic, &app.Job,
-			&app.Description, &app.CreateAt, &app.UpdateAt, &app.Status,
+			&app.Description, &app.CreateAt, &app.UpdateAt, &app.Status, &app.ProjectId,
 		)
 		if err != nil {
 			return nil, exception.NewInternalServerError("query application error, %s", err.Error())
@@ -148,7 +149,7 @@ func (s *service) UpdateApplication(ctx context.Context, req *application.Update
 	app := ins.Base
 	_, err = stmt.Exec(
 		app.Name, app.Repo, app.Branch, app.Module, app.Topic,
-		app.Job, app.Description, app.CreateAt, app.UpdateAt, app.Status,
+		app.Job, app.Description, app.CreateAt, app.UpdateAt, app.Status, app.ProjectId,
 		app.Id,
 	)
 	if err != nil {
@@ -178,7 +179,7 @@ func (s *service) DescribeApplication(ctx context.Context, req *application.Desc
 	app := ins.Base
 	err = queryStmt.QueryRow(args...).Scan(
 		&app.Id, &app.Name, &app.Repo, &app.Branch, &app.Module, &app.Topic,
-		&app.Job, &app.Description, &app.CreateAt, &app.UpdateAt, &app.Status,
+		&app.Job, &app.Description, &app.CreateAt, &app.UpdateAt, &app.Status, &app.ProjectId,
 	)
 
 	if err != nil {

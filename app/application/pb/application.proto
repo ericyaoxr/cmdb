@@ -54,6 +54,9 @@ message Base {
 	// 状态
 	// @gotags: json:"status"
     string status = 11;
+	// 状态
+	// @gotags: json:"project_id"
+    int64 project_id = 12;
 }
 message QueryApplicationRequest {
     uint64 page_size = 1;

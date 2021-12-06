@@ -12,6 +12,7 @@ require (
 	github.com/grpc-ecosystem/go-grpc-middleware v1.2.0
 	github.com/rs/xid v1.3.0
 	github.com/spf13/cobra v1.2.1
+	github.com/stretchr/testify v1.7.0
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/billing v1.0.302
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/cdb v1.0.272
 	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common v1.0.270

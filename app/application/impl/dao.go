@@ -39,7 +39,7 @@ func (s *service) save(ctx context.Context, ins *application.Application) error 
 	app := ins.Base
 	_, err = stmt.Exec(
 		&app.Id, &app.Name, &app.Repo, &app.Branch, &app.Module, &app.Topic, &app.Job,
-		&app.Description, &app.CreateAt, &app.UpdateAt, &app.Status,
+		&app.Description, &app.CreateAt, &app.UpdateAt, &app.Status, &app.ProjectId,
 	)
 	if err != nil {
 		return fmt.Errorf("save application resource info error, %s", err)
