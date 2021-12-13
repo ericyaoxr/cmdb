@@ -1,0 +1,122 @@
+syntax = "proto3";
+
+package ericyaoxr.cmdb.rds;
+option go_package="github.com/ericyaoxr/cmdb/app/rds";
+
+import "app/resource/pb/resource.proto";
+
+service Service {
+    rpc SaveRds(Rds) returns(Rds) {}
+    rpc QueryRds(QueryRdsRequest) returns(RdsSet) {}
+    rpc UpdateRds(UpdateRdsRequest) returns(Rds) {}
+    rpc DescribeRds(DescribeRdsRequest) returns(Rds) {}
+    rpc DeleteRds(DeleteRdsRequest) returns(Rds) {}
+}
+
+enum UpdateMode {
+    PUT = 0;
+    PATCH = 1;
+}
+
+enum Status {
+    PENDING = 0;
+    RUNNING = 1;
+    ISOLATING = 2;
+    ISOLATED = 3;
+}
+
+enum PayType {
+    PREPAID = 0;
+    POSTPAID_BY_HOUR = 1;
+}
+
+message Rds {
+    ericyaoxr.cmdb.resource.Base base = 1;
+    ericyaoxr.cmdb.resource.Information information = 2;
+    Describe describe = 3;
+}
+
+message Describe {
+    // 关联Resource
+    // @gotags: json:"resource_id"
+    string resource_id = 1;
+    // 核数
+    // @gotags: json:"cpu"
+    int64 cpu = 2;
+    // 内存
+    // @gotags: json:"memory"
+    int64 memory = 3;
+    // 硬盘容量，单位为 GB
+    // @gotags: json:"volume"
+    int64 volume = 4;
+    // 实例引擎版本
+    // @gotags: json:"engine_version"
+    string engine_version = 5;
+    // 节点数
+    // @gotags: json:"instance_nodes"
+    int64 instance_nodes = 6;
+    // 实例类型，可能的返回值：1-主实例；2-灾备实例；3-只读实例
+    // @gotags: json:"instance_type"
+    int64 instance_type = 7;
+    // 内网端口号
+    // @gotags: json:"port"
+    int64 port = 8;
+    // Master
+    // @gotags: json:"master"
+    string master = 9;
+    // Slave
+    // @gotags: json:"slave"
+    string slave = 10;
+    // QPS 每秒查询数量
+    // @gotags: json:"qps"
+    int64 qps = 11;
+    // 可用区部署方式。可能的值为：0 - 单可用区；1 - 多可用区
+    // @gotags: json:"deploy_mode"
+    int64 deploy_mode = 12;
+    // 外网端口
+    // @gotags: json:"wan_port"
+    int64 wan_port = 13;
+}
+
+message QueryRdsRequest {
+    uint64 page_size = 1;
+    uint64 page_number = 2;
+    string keywords = 3;
+}
+
+message RdsSet {
+    repeated Rds items = 1;
+    int64 total = 2;
+}
+
+message UpdateRdsRequest {
+    // @gotags: json:"id" validate:"required"
+    string id = 1;
+    // @gotags: json:"update_mode"
+    UpdateMode update_mode = 2;
+    // @gotags: json:"data" validate:"required"
+    UpdateRdsData update_rds_data = 3;
+}
+
+message UpdateRdsData {
+    ericyaoxr.cmdb.resource.Information information = 1;
+    Describe describe = 2;
+}
+
+enum DescribeBy {
+    RDS_ID = 0;
+    INSTANCE_ID = 1;
+}
+
+message DescribeRdsRequest {
+    // @gotags: json:"describe_by"
+    DescribeBy describe_by = 1;
+    // @gotags: json:"value" validate:"required"
+    string value = 2;
+    
+}
+
+message DeleteRdsRequest {
+    // @gotags: json:"id" validate:"required"
+    string id = 1;
+}

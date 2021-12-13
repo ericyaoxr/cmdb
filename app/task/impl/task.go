@@ -48,6 +48,8 @@ func (s *service) CreatTask(ctx context.Context, req *task.CreateTaskRequst) (
 	switch req.ResourceType {
 	case resource.Type_HOST:
 		go s.syncHost(syncCtx, secret, t, s.SyncTaskCallback)
+	case resource.Type_RDS:
+		go s.syncRds(syncCtx, secret, t, s.SyncTaskCallback)
 	case resource.Type_BILL:
 		go s.syncBill(syncCtx, secret, t, s.SyncTaskCallback)
 	}

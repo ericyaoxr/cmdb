@@ -4,6 +4,7 @@ import (
 	cdb "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/cdb/v20170320"
 
 	"github.com/ericyaoxr/cmdb/app/rds"
+	"github.com/ericyaoxr/cmdb/utils"
 )
 
 func (o *CDBOperater) Query(req *cdb.DescribeDBInstancesRequest) (*rds.RdsSet, error) {
@@ -12,5 +13,12 @@ func (o *CDBOperater) Query(req *cdb.DescribeDBInstancesRequest) (*rds.RdsSet, e
 		return nil, err
 	}
 
-	return o.transferSet(resp.Response.Items), nil
+	set := o.transferSet(resp.Response.Items)
+	set.Total = utils.PtrInt64(resp.Response.TotalCount)
+
+	return set, nil
+}
+
+func (o *CDBOperater) PageQuery() rds.Pager {
+	return newPager(20, o)
 }

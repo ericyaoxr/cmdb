@@ -21,7 +21,7 @@ func main() {
 
 	request := cvm.NewInquiryPriceRenewInstancesRequest()
 
-	request.InstanceIds = common.StringPtrs([]string{"ins-00m50364"})
+	request.InstanceIds = common.StringPtrs([]string{"ins-ivqfp5jg"})
 	request.InstanceChargePrepaid = &cvm.InstanceChargePrepaid{
 		Period: common.Int64Ptr(12),
 	}

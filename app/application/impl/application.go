@@ -25,8 +25,8 @@ const (
 	status=?,project_id=?
 	WHERE id = ?`
 
-	queryApplicationSQL  = `SELECT * FROM application as a`
-	deleteApplicationSQL = `DELETE FROM application as a WHERE a.id = ?;`
+	queryApplicationSQL  = `SELECT * FROM application`
+	deleteApplicationSQL = `DELETE FROM application WHERE id = ?;`
 )
 
 func (s *service) SaveApplication(ctx context.Context, h *application.Application) (
@@ -58,7 +58,7 @@ func (s *service) QueryApplication(ctx context.Context, req *application.QueryAp
 		)
 	}
 
-	querySQL, args := query.Order("create_at").Desc().Limit(req.OffSet(), uint(req.PageSize)).BuildQuery()
+	querySQL, args := query.Order("project_id").Desc().Limit(req.OffSet(), uint(req.PageSize)).BuildQuery()
 	s.log.Debugf("sql: %s", querySQL)
 
 	queryStmt, err := s.db.Prepare(querySQL)

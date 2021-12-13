@@ -21,7 +21,7 @@ const (
 		application_id=?,name=?,host=?,port=?,env=?,type=?,source=?,create_at=?,update_at=?
 	WHERE id = ?`
 
-	queryConfigSQL  = `SELECT c.id,c.application_id,c.name,c.host,c.port,c.env,c.type,c.source,c.create_at,c.update_at,a.name,a.repo, a.branch, a.module,a.topic, a.job, a.description, a.status FROM config as c LEFT JOIN application as a ON c.application_id=a.id`
+	queryConfigSQL  = `SELECT c.id,c.application_id,c.name,c.host,c.port,c.env,c.type,c.source,c.create_at,c.update_at,a.name,a.repo, a.branch, a.module,a.topic, a.job, a.description, a.status,a.project_id FROM config as c LEFT JOIN application as a ON c.application_id=a.id`
 	deleteConfigSQL = `DELETE FROM config WHERE id = ?;`
 )
 
@@ -77,7 +77,7 @@ func (s *service) QueryConfig(ctx context.Context, req *config.QueryConfigReques
 		desc := ins.Describe
 		err := rows.Scan(
 			&desc.Id, &desc.ApplicationId, &desc.Name, &desc.Host, &desc.Port, &desc.Env, &desc.Type, &desc.Source, &desc.CreateAt, &desc.UpdateAt,
-			&app.Name, &app.Repo, &app.Branch, &app.Module, &app.Topic, &app.Job, &app.Description, &app.Status,
+			&app.Name, &app.Repo, &app.Branch, &app.Module, &app.Topic, &app.Job, &app.Description, &app.Status, &app.ProjectId,
 		)
 		if err != nil {
 			return nil, exception.NewInternalServerError("query host error, %s", err.Error())
@@ -178,7 +178,7 @@ func (s *service) DescribeConfig(ctx context.Context, req *config.DescribeConfig
 	desc := conf.Describe
 	err = queryStmt.QueryRow(args...).Scan(
 		&desc.Id, &desc.ApplicationId, &desc.Name, &desc.Host, &desc.Port, &desc.Env, &desc.Type, &desc.Source, &desc.CreateAt, &desc.UpdateAt,
-		&app.Name, &app.Repo, &app.Branch, &app.Module, &app.Topic, &app.Job, &app.Description, &app.Status,
+		&app.Name, &app.Repo, &app.Branch, &app.Module, &app.Topic, &app.Job, &app.Description, &app.Status, &app.ProjectId,
 	)
 
 	if err != nil {

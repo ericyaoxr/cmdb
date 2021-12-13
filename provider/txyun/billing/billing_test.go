@@ -18,15 +18,15 @@ var (
 
 func TestQuery(t *testing.T) {
 	req := op.NewPageQueryRequest()
-	req.Month = "2021-10"
+	req.Month = "2021-11"
 
 	pager := operater.PageQuery(req)
 	hasNext := true
 	for hasNext {
 		p := pager.Next()
-		if p.Err != nil {
-			panic(p.Err)
-		}
+		// if p.Err != nil {
+		// 	panic(p.Err)
+		// }
 		hasNext = p.HasNext
 		fmt.Println(p.Data)
 	}
@@ -44,6 +44,6 @@ func init() {
 		panic("empty TX_CLOUD_SECRET_KEY")
 	}
 
-	client := connectivity.NewTencentCloudClient(secretID, secretKey, regions.Shanghai)
+	client := connectivity.NewTencentCloudClient(secretID, secretKey, regions.Guangzhou)
 	operater = op.NewBillingOperater(client.BillingClient())
 }

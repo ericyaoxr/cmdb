@@ -29,8 +29,8 @@ func (h *handler) Name() string {
 }
 
 func (h *handler) Registry(r router.SubRouter) {
-	hr := r.ResourceRouter("bill")
-	hr.Permission(true)
+	// hr := r.ResourceRouter("bill")
+	// hr.Permission(true)
 }
 
 func init() {

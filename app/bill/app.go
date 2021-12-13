@@ -1,5 +1,5 @@
 package bill
 
 const (
-	AppName = "bill"
+	AppName = "Bill"
 )

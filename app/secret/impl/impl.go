@@ -4,7 +4,9 @@ import (
 	"database/sql"
 
 	"github.com/ericyaoxr/cmdb/app"
+	"github.com/ericyaoxr/cmdb/app/bill"
 	"github.com/ericyaoxr/cmdb/app/host"
+	"github.com/ericyaoxr/cmdb/app/rds"
 	"github.com/ericyaoxr/cmdb/app/secret"
 	"github.com/ericyaoxr/cmdb/conf"
 	"github.com/ericyaoxr/mcube/logger"
@@ -21,6 +23,8 @@ type service struct {
 	db   *sql.DB
 	log  logger.Logger
 	host host.ServiceServer
+	rds  rds.ServiceServer
+	bill bill.ServiceServer
 	secret.UnimplementedServiceServer
 }
 
@@ -33,6 +37,8 @@ func (s *service) Config() error {
 	s.log = zap.L().Named(s.Name())
 	s.db = db
 	s.host = app.GetGrpcApp(host.AppName).(host.ServiceServer)
+	s.rds = app.GetGrpcApp(rds.AppName).(rds.ServiceServer)
+	s.bill = app.GetGrpcApp(bill.AppName).(bill.ServiceServer)
 	return nil
 }
 

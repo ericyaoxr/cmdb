@@ -43,3 +43,8 @@ func SlicePtrStrv(items []*string) []string {
 
 	return vs
 }
+
+func StringPtrStrv(items *string) []string {
+	vs := []string{}
+	return vs
+}
